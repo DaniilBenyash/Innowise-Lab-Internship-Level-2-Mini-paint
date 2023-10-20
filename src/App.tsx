@@ -1,7 +1,9 @@
+import { CanvasPage } from "./pages/CanvasPage";
+
 export const App = () => {
   return (
     <div className="App">
-     app
+     <CanvasPage/>
     </div>
   );
 }
