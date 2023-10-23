@@ -18,7 +18,6 @@ const moveDrawRectangle = (ev: MouseEvent, context: typeContext, image: string |
     const img = new Image();
     if (image) img.src = image
 
-    context?.clearRect(0, 0, canvasWidth, canvasHeight)
     context?.drawImage(img, 0, 0, canvasWidth, canvasHeight);
     context?.beginPath();
     context?.rect(x, y, ev.offsetX - x, ev.offsetY - y);

@@ -2,7 +2,9 @@ import { RefObject, useEffect, useState } from 'react';
 import { startDrawBrush, moveDrawBrush } from '../../features/canvasFeatures/drawBrush';
 import { startDrawLine, moveDrawLine } from '../../features/canvasFeatures/drawLine';
 import { startDrawRectangle, moveDrawRectangle } from '../../features/canvasFeatures/drawRectangle';
+import { startDrawCircle, moveDrawCircle } from '../../features/canvasFeatures/drawCircle';
 import { typeContext, enumDraw, typeDrawEvents } from '../../variables/canvasTypeVariables';
+
 
 export const useCanvas = (canvasRef: RefObject<HTMLCanvasElement>, typeDraw: enumDraw, widthBrush: number, colorBrush: string, canvasWidth: number, canvasHeight: number) => {
     const [draw, setDraw] = useState(false)
@@ -32,6 +34,11 @@ export const useCanvas = (canvasRef: RefObject<HTMLCanvasElement>, typeDraw: enu
             [enumDraw.Rectangle]: {
                 startDraw: (event: MouseEvent) => {startDrawRectangle(event, context, setDraw)},
                 moveDraw: (event: MouseEvent) => {moveDrawRectangle(event, context, image, draw, canvasWidth, canvasHeight)},
+                finishDraw: () => {setDraw(false)},
+            },
+            [enumDraw.Circle]: {
+                startDraw: (event: MouseEvent) => {startDrawCircle(event, context, setDraw)},
+                moveDraw: (event: MouseEvent) => {moveDrawCircle(event, context, image, draw, canvasWidth, canvasHeight)},
                 finishDraw: () => {setDraw(false)},
             },
         }
