@@ -4,6 +4,8 @@ import { startDrawLine, moveDrawLine } from '../../features/canvasFeatures/drawL
 import { startDrawRectangle, moveDrawRectangle } from '../../features/canvasFeatures/drawRectangle';
 import { startDrawCircle, moveDrawCircle } from '../../features/canvasFeatures/drawCircle';
 import { typeContext, enumDraw, typeDrawEvents } from '../../variables/canvasTypeVariables';
+import { moveDrawStar, startDrawStar } from '../../features/canvasFeatures/drawStar';
+import { moveDrawPoligon, startDrawPoligon } from '../../features/canvasFeatures/drawPoligon';
 
 
 export const useCanvas = (canvasRef: RefObject<HTMLCanvasElement>, typeDraw: enumDraw, widthBrush: number, colorBrush: string, canvasWidth: number, canvasHeight: number) => {
@@ -19,7 +21,7 @@ export const useCanvas = (canvasRef: RefObject<HTMLCanvasElement>, typeDraw: enu
             context.strokeStyle = colorBrush
             context.fillStyle = colorBrush
         }
-
+        
         const drawEvents: typeDrawEvents = {
             [enumDraw.Brush]: {
                 startDraw: () => {startDrawBrush(context, setDraw)},
@@ -27,18 +29,28 @@ export const useCanvas = (canvasRef: RefObject<HTMLCanvasElement>, typeDraw: enu
                 finishDraw: () => {setDraw(false)},
             },
             [enumDraw.Line]: {
-                startDraw: (event: MouseEvent) => {startDrawLine(event, context, setDraw)},
+                startDraw: (event: MouseEvent) => {startDrawLine(context, setDraw, event)},
                 moveDraw: (event: MouseEvent) => {moveDrawLine(event, context, image, draw, canvasWidth, canvasHeight)},
                 finishDraw: () => {setDraw(false)},
             },
             [enumDraw.Rectangle]: {
-                startDraw: (event: MouseEvent) => {startDrawRectangle(event, context, setDraw)},
+                startDraw: (event: MouseEvent) => {startDrawRectangle(context, setDraw, event)},
                 moveDraw: (event: MouseEvent) => {moveDrawRectangle(event, context, image, draw, canvasWidth, canvasHeight)},
                 finishDraw: () => {setDraw(false)},
             },
             [enumDraw.Circle]: {
-                startDraw: (event: MouseEvent) => {startDrawCircle(event, context, setDraw)},
+                startDraw: (event: MouseEvent) => {startDrawCircle(context, setDraw, event)},
                 moveDraw: (event: MouseEvent) => {moveDrawCircle(event, context, image, draw, canvasWidth, canvasHeight)},
+                finishDraw: () => {setDraw(false)},
+            },
+            [enumDraw.Star]: {
+                startDraw: (event: MouseEvent) => {startDrawStar(context, setDraw, event)},
+                moveDraw: (event: MouseEvent) => {moveDrawStar(event, context, image, draw, canvasWidth, canvasHeight)},
+                finishDraw: () => {setDraw(false)},
+            },
+            [enumDraw.Poligon]: {
+                startDraw: (event: MouseEvent) => {startDrawPoligon(context, setDraw, event)},
+                moveDraw: (event: MouseEvent) => {moveDrawPoligon(event, context, image, draw, canvasWidth, canvasHeight)},
                 finishDraw: () => {setDraw(false)},
             },
         }

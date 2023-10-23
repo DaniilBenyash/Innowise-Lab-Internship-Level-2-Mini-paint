@@ -1,26 +1,23 @@
 import { typeContext } from "../../variables/canvasTypeVariables";
+import { startDraw } from "./startDraw";
 
-let x = 0
-let y = 0
-
-const startDrawRectangle = (ev: MouseEvent, context: typeContext, setDraw: any) => {
-    setDraw(true)
-
-    context?.beginPath();
-    
-    x = ev.offsetX
-    y = ev.offsetY
+const coord = {
+    x: 0,
+    y: 0,
 }
+
+const startDrawRectangle = (context: typeContext, setDraw: any, ev: MouseEvent) => startDraw(context, setDraw, ev, coord)
 
 const moveDrawRectangle = (ev: MouseEvent, context: typeContext, image: string | undefined, draw: boolean, canvasWidth: number, canvasHeight: number) => {
     if(!draw) return
 
     const img = new Image();
     if (image) img.src = image
-
+    
+    context?.clearRect(0, 0, canvasWidth, canvasHeight)
     context?.drawImage(img, 0, 0, canvasWidth, canvasHeight);
     context?.beginPath();
-    context?.rect(x, y, ev.offsetX - x, ev.offsetY - y);
+    context?.rect(coord.x, coord.y, ev.offsetX - coord.x, ev.offsetY - coord.y);
     context?.fill()
     context?.stroke();
     context?.closePath()

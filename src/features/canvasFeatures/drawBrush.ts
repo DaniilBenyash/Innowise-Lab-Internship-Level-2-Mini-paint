@@ -1,10 +1,7 @@
 import { typeContext } from "../../variables/canvasTypeVariables";
+import { startDraw } from "./startDraw";
 
-const startDrawBrush = (context: typeContext, setDraw: any) => {
-    setDraw(true)
-
-    context?.beginPath();
-}
+const startDrawBrush = (context: typeContext, setDraw: any) => startDraw(context, setDraw)
 
 const moveDrawBrush = (ev: MouseEvent, context: typeContext, draw: boolean) => {
     if (!draw) return
@@ -13,4 +10,4 @@ const moveDrawBrush = (ev: MouseEvent, context: typeContext, draw: boolean) => {
     context?.stroke();  
 }
 
-export { startDrawBrush, moveDrawBrush}
+export { startDrawBrush, moveDrawBrush }

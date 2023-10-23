@@ -18,7 +18,7 @@ export const ButtonsGroup = ({typeDraw, onChange}: ButtonsGroupProps) => {
             <RadioGroup value={typeDraw} onChange={onChange} name="radio-buttons-group">
                 {arrayOfButtons.map(([nameEvent, event]) => {
                     return (
-                        <Radio value={event} label={nameEvent} variant="outlined" />
+                        <Radio key={nameEvent} value={event} label={nameEvent} variant="outlined" />
                     )
                 })}
             </RadioGroup>
