@@ -2,9 +2,7 @@ import { RefObject, useRef, useState } from 'react';
 import './Canvas.scss';
 import { canvasWidth, canvasHeight, maxWidthBrush, defaultWidthBrush, defaultColorBrush } from '../../variables/canvasVariables'
 import Slider from '@mui/material/Slider';
-import FormControl from '@mui/joy/FormControl';
-import Radio from '@mui/joy/Radio';
-import RadioGroup from '@mui/joy/RadioGroup';
+import { ButtonsGroup } from '../ButtonsGroup/ButtonsGroup';
 import { useCanvas } from './useCanvas';
 import { clearCanvas } from '../../features/canvasFeatures/clearCanvas';
 import { enumDraw } from '../../variables/canvasTypeVariables';
@@ -35,14 +33,7 @@ export const Canvas = () => {
             <input onChange={handleInputColorChange} type="color" />   
             <Slider onChange={handleSliderChange} max={maxWidthBrush} defaultValue={widthBrush} aria-label="Default" valueLabelDisplay="auto" sx={{width: canvasWidth}}/>
             <button onClick={handleButtonClick}>Clear</button>
-            <FormControl>
-                <RadioGroup value={typeDraw} onChange={handleRadioGroupChange} name="radio-buttons-group">
-                    <Radio value='brushDraw' label="Brush" variant="outlined" />
-                    <Radio value='lineDraw' label="Line" variant="outlined" />
-                    <Radio value="rectangleDraw" label="Rectangle" variant="outlined" />
-                    <Radio value="circle" label="circle" variant="outlined" />
-                </RadioGroup>
-            </FormControl>
+            <ButtonsGroup typeDraw={typeDraw} onChange={handleRadioGroupChange}/>
         </>
     )
 }
