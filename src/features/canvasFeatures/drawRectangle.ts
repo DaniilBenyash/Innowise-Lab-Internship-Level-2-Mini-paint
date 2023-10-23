@@ -1,4 +1,4 @@
-import { typeContext } from "../components/Canvas/useCanvas";
+import { typeContext } from "../../variables/canvasTypeVariables";
 
 let x = 0
 let y = 0

@@ -1,4 +1,4 @@
-import { typeContext } from "../components/Canvas/useCanvas";
+import { typeContext } from "../../variables/canvasTypeVariables";
 
 const startDrawBrush = (context: typeContext, setDraw: any) => {
     setDraw(true)

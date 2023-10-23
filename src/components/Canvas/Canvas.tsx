@@ -1,22 +1,16 @@
 import { RefObject, useRef, useState } from 'react';
 import './Canvas.scss';
+import { canvasWidth, canvasHeight, maxWidthBrush, defaultWidthBrush, defaultColorBrush } from '../../variables/canvasVariables'
 import Slider from '@mui/material/Slider';
 import FormControl from '@mui/joy/FormControl';
 import Radio from '@mui/joy/Radio';
 import RadioGroup from '@mui/joy/RadioGroup';
 import { useCanvas } from './useCanvas';
-import { clearCanvas } from '../../canvasFeatures/clearCanvas';
-
-export type typeDraw = 'brushDraw' | 'lineDraw' | 'rectangleDraw'
+import { clearCanvas } from '../../features/canvasFeatures/clearCanvas';
+import { enumDraw } from '../../variables/canvasTypeVariables';
 
 export const Canvas = () => {
-    const canvasWidth = 500
-    const canvasHeight = 400
-    const maxWidthBrush = 20
-    const defaultWidthBrush = 5
-    const defaultColorBrush = '#000000'
-
-    const [typeDraw, setTypeDraw] = useState<typeDraw>('brushDraw')
+    const [typeDraw, setTypeDraw] = useState<enumDraw>(enumDraw.Brush)
     const [widthBrush, setWidthBrush] = useState(defaultWidthBrush)
     const [colorBrush, setColorBrush] = useState(defaultColorBrush)
 
