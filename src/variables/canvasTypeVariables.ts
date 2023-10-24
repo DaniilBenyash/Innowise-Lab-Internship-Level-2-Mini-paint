@@ -9,13 +9,9 @@ export enum enumDraw {
 
 export type typeContext = CanvasRenderingContext2D | null | undefined
 
-type typeDrawEvent = {
+export type typeDrawEvent = {
     startDraw: (event: MouseEvent) => any,
     moveDraw: (event: MouseEvent) => any
     finishDraw: () => any
-}
-
-export type typeDrawEvents = {
-    [key in enumDraw]: typeDrawEvent
 }
 
