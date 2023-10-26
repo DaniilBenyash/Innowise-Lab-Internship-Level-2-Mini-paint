@@ -1,4 +1,4 @@
-import { FirebaseDBServices, IFirebaseDBServices } from './firebaseDBServices'
+import { FirebaseDBService, IDBService } from './firebaseDBServices'
 
 export type typePaint = {
   picture: string | undefined
@@ -8,31 +8,31 @@ export type typePaint = {
 export type typePaints = typePaint[]
 
 interface ICanvasService {
-  dataBase: IFirebaseDBServices<typePaints>
+  dataBase: IDBService<typePaints>
   key: string
-  getPaints(): Promise<typePaints>
-  setPaint(paint: typePaint, paints: typePaints): Promise<typePaints>
+  getPData(): Promise<typePaints>
+  setData(paint: typePaint, paints: typePaints): Promise<typePaints>
 }
 
 class CanvasService implements ICanvasService {
   dataBase
   key
 
-  constructor(dataBase: IFirebaseDBServices<typePaints>) {
+  constructor(dataBase: IDBService<typePaints>) {
     this.dataBase = dataBase
     this.key = 'paints'
   }
 
-  async getPaints(): Promise<typePaints> {
-    const response = await this.dataBase.getPaints(this.key)
+  async getPData(): Promise<typePaints> {
+    const response = await this.dataBase.getData(this.key)
     return response
   }
 
-  async setPaint(paint: typePaint, paints: typePaints): Promise<typePaints> {
+  async setData(paint: typePaint, paints: typePaints): Promise<typePaints> {
     const changedPaints = paints ? [paint, ...paints] : [paint]
-    const response = await this.dataBase.setPaint(changedPaints, this.key)
+    const response = await this.dataBase.setData(changedPaints, this.key)
     return response
   }
 }
 
-export const canvasService = new CanvasService(new FirebaseDBServices())
+export const canvasService = new CanvasService(new FirebaseDBService())

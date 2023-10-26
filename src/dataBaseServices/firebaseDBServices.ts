@@ -1,29 +1,29 @@
 import { getDatabase, ref, onValue, set, Database } from 'firebase/database'
 
-export interface IFirebaseDBServices<TData> {
+export interface IDBService<TData> {
   db: Database
-  getPaints(key: string): Promise<TData>
-  setPaint<TCard>(card: TCard, key: string): Promise<TData>
+  getData(key: string): Promise<TData>
+  setData<TCard>(card: TCard, key: string): Promise<TData>
 }
 
-export class FirebaseDBServices<TData> implements IFirebaseDBServices<TData> {
+export class FirebaseDBService<TData> implements IDBService<TData> {
   db = getDatabase()
 
-  async getPaints<TData>(key: string): Promise<TData> {
+  async getData<TData>(key: string): Promise<TData> {
     const starCountRef = ref(this.db, key)
 
-    const promiseGetTasks: Promise<TData> = new Promise((res) => {
+    const promiseGetData: Promise<TData> = new Promise((res) => {
       onValue(starCountRef, (snapshot) => {
         res(snapshot.val())
       })
     })
 
-    return await promiseGetTasks
+    return await promiseGetData
   }
 
-  async setPaint<TCard>(card: TCard, key: string): Promise<TData> {
+  async setData<TCard>(card: TCard, key: string): Promise<TData> {
     await set(ref(this.db, key), card)
 
-    return await this.getPaints(key)
+    return await this.getData(key)
   }
 }

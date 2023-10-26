@@ -7,19 +7,19 @@ import {
 } from 'firebase/auth'
 import { firebase } from '../firebase'
 
-interface IFirebaseAuth {
-  firebaseInit: void
+interface IDataBaseAuth<TUserData> {
+  databaseInit: void
   auth: Auth
-  signIn(email: string, password: string): Promise<UserCredential>
-  signUp(email: string, password: string): Promise<UserCredential>
+  signIn(email: string, password: string): Promise<TUserData>
+  signUp(email: string, password: string): Promise<TUserData>
 }
 
-export class FirebaseAuth implements IFirebaseAuth {
-  firebaseInit
+export class FirebaseAuth implements IDataBaseAuth<UserCredential> {
+  databaseInit
   auth
 
   constructor() {
-    this.firebaseInit = firebase.initialization()
+    this.databaseInit = firebase.initialization()
     this.auth = getAuth()
   }
 
