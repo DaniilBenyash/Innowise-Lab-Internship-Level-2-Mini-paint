@@ -1,10 +1,9 @@
-import { Paint } from "../components/Paint/Paint"
+import { Paint } from '../components/Paint/Paint'
 
 export const PaintPage = () => {
-
-    return (
-        <main>
-            <Paint />
-        </main>    
-    )
+  return (
+    <main>
+      <Paint />
+    </main>
+  )
 }

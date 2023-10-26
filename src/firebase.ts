@@ -1,19 +1,28 @@
-import { initializeApp } from 'firebase/app';
-import { getDatabase } from '@firebase/database';
+import { FirebaseApp, initializeApp } from 'firebase/app'
+import { getDatabase } from '@firebase/database'
 
+type typeConfig = {
+  apiKey: string
+  authDomain: string
+  databaseURL: string
+  projectId: string
+  storageBucket: string
+  messagingSenderId: string
+  appId: string
+}
 
 export class FirebaseInitialization {
-  private config
-  private app: any
-  
-  constructor(config: any) {
-    this.config = JSON.parse(config);
+  private config: typeConfig
+  private app: FirebaseApp
+
+  constructor(config?: string) {
+    this.config = config && JSON.parse(config)
+    this.app = initializeApp(this.config)
   }
 
   initialization() {
-    this.app = initializeApp(this.config);
-    getDatabase(this.app);
+    getDatabase(this.app)
   }
 }
 
-export const firebase = new FirebaseInitialization(process.env.REACT_APP_FIREBASE_CONFIG);
+export const firebase = new FirebaseInitialization(process.env.REACT_APP_FIREBASE_CONFIG)

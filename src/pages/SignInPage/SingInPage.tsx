@@ -1,46 +1,46 @@
-import { useEffect, useState } from 'react';
-import { useUserData } from '../../features/userData/useUserData';
-import { useNavigate, Link } from 'react-router-dom';
-import styles from './SignInPage.module.scss';
-import { MAIN_PAGE, SIGN_UP } from '../../variables/routes';
-import { AuthForm } from '../../components/AuthForm/AuthForm';
+import { useEffect, useState, MouseEvent } from 'react'
+import { useUserData } from '../../features/userData/useUserData'
+import { useNavigate, Link } from 'react-router-dom'
+import styles from './SignInPage.module.scss'
+import { MAIN_PAGE, SIGN_UP } from '../../variables/routes'
+import { AuthForm } from '../../components/AuthForm/AuthForm'
+import { typeUserData } from '../../variables/reduxTypes'
 
 export const SignInPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
-  const changeInputEmail = (email: string) => setEmail(email);
-  const changeInputPassword = (password: string) => setPassword(password);
+  const changeInputEmail = (email: string) => setEmail(email)
+  const changeInputPassword = (password: string) => setPassword(password)
 
-  const { userData, signInError, signInUser } = useUserData();
+  const { userData, signInError, signInUser } = useUserData()
 
-  const navigate = useNavigate();
-
+  const navigate = useNavigate()
 
   useEffect(() => {
-
-    const userHandler = (userData: any, error: any) => {
+    const userHandler = (userData: typeUserData | null, error: string | null) => {
       try {
-        if (userData) navigate(MAIN_PAGE);
-        if (error) throw new Error(error);
-      } catch (error: any) {
-        setError(error.message);
-      }
-    };
-    
-    userHandler(userData, signInError);
-  }, [userData, signInError, navigate]);
+        if (userData) navigate(MAIN_PAGE)
 
-  function handleSubmit(ev: any) {
+        if (error) throw new Error(error)
+      } catch (error) {
+        setError((error as Error).message)
+      }
+    }
+
+    userHandler(userData, signInError)
+  }, [userData, signInError, navigate])
+
+  function handleSubmit(ev: MouseEvent) {
     ev.preventDefault()
-    
+
     const formData = {
       email: email,
-      password: password
-    };
-    
-    signInUser(formData);
+      password: password,
+    }
+
+    signInUser(formData)
   }
 
   return (
@@ -53,7 +53,7 @@ export const SignInPage = () => {
           onChangeEmail={changeInputEmail}
           valuePassword={password}
           onChangePassword={changeInputPassword}
-          nameButton="Sign In"
+          nameButton='Sign In'
           onClickButton={handleSubmit}
         />
         <p className={styles.sign_in__link}>
@@ -62,5 +62,5 @@ export const SignInPage = () => {
         </p>
       </div>
     </main>
-  );
-};
+  )
+}

@@ -1,11 +1,11 @@
 type typeAuthData = {
-    email: string,
-    password: string,
+  email: string
+  password: string
 }
 
 type typeUserData = {
-    email: string,
-    id: string,
+  email: string
+  id: string
 }
 
-export type{ typeAuthData, typeUserData }
+export type { typeAuthData, typeUserData }

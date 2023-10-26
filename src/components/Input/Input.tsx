@@ -1,24 +1,32 @@
-import { ChangeEvent } from 'react';
-import styles from './Input.module.scss';
-import classNames from 'classnames';
+import { ChangeEvent } from 'react'
+import styles from './Input.module.scss'
+import classNames from 'classnames'
 
 type InputProps = {
-  label?: string,
-  placeholder?: string,
-  onChange: (value: string) => any,
-  value?: string,
-  type?: string,
-  min?:string,
-  className?: string,
+  label?: string
+  placeholder?: string
+  onChange: (value: string) => void
+  value?: string
+  type?: string
+  min?: string
+  className?: string
 }
 
-export const Input = ({ label, placeholder, onChange, value, type = 'input', min, className }: InputProps) => {
-  const handleChangeInput = (ev: ChangeEvent<HTMLInputElement>) => onChange(ev.target.value);
+export const Input = ({
+  label,
+  placeholder,
+  onChange,
+  value,
+  type = 'input',
+  min,
+  className,
+}: InputProps) => {
+  const handleChangeInput = (ev: ChangeEvent<HTMLInputElement>) => onChange(ev.target.value)
 
-  const labelStyle = classNames({[styles.input]: !className})
-  
+  const labelStyle = classNames({ [styles.input]: !className })
+
   const inputStyle = classNames(className, {
-    [styles.input__form]: !className
+    [styles.input__form]: !className,
   })
   return (
     <label className={labelStyle}>
@@ -32,5 +40,5 @@ export const Input = ({ label, placeholder, onChange, value, type = 'input', min
         min={min}
       />
     </label>
-  );
-};
+  )
+}

@@ -1,19 +1,19 @@
-.header{
+.header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 0;
 
-    &__title{
+    &__title {
         font-size: 26px;
         font-weight: 700;
     }
 
-    &__user_panel{
+    &__user_panel {
         font-size: 18px;
     }
 
-    &__button{
+    &__button {
         background-color: none;
         border: none;
         cursor: pointer;
@@ -22,9 +22,9 @@
 }
 
 @media screen and (max-width: 500px) {
-    .header{
-        
-        &__user_panel{
+    .header {
+
+        &__user_panel {
             font-size: 0;
         }
     }

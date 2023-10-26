@@ -10,7 +10,7 @@
         align-items: center;
         border-bottom: 1px solid #719191;
         margin-bottom: 20px;
-        
+
         img {
             max-height: 700px;
             width: min-content;
@@ -34,13 +34,13 @@
         padding: 10px;
         border-radius: 20px;
 
-        &:active{
+        &:active {
             background-color: #529292;
         }
     }
 
     &__paintLink {
-        position:fixed;
+        position: fixed;
         right: 200px;
         bottom: 100px;
     }
@@ -55,7 +55,7 @@
         font-size: 18px;
         padding: 20px;
 
-        &:active{
+        &:active {
             background-color: #eb7746;
         }
     }

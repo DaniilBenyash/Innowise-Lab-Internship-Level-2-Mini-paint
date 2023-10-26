@@ -1,28 +1,29 @@
-.sign_in{
+.sign_in {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
 
-    &__section{
+    &__section {
         border: 1px solid #719191;
         padding: 50px;
         border-radius: 20px;
     }
-    h1{
+
+    h1 {
         margin-bottom: 20px;
     }
 
-    &__error{
+    &__error {
         color: red;
         margin-bottom: 10px;
     }
-    
-    &__link{
+
+    &__link {
         margin-top: 10px;
-        
-        a{
+
+        a {
             color: #eb9a78;
         }
     }

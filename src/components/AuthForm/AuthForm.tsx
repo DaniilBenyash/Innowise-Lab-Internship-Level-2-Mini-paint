@@ -1,15 +1,15 @@
-import { Input } from '../Input/Input';
-import { Button } from '../Button/Button';
-import { MouseEvent } from 'react';
+import { Input } from '../Input/Input'
+import { Button } from '../Button/Button'
+import { MouseEvent } from 'react'
 import styles from './AuthForm.module.scss'
 
 type AuthFormProps = {
-  valueEmail: string,
-  onChangeEmail: (value: string) => any,
-  valuePassword: string,
-  onChangePassword: (value: string) => any,
-  nameButton: string,
-  onClickButton: (ev: MouseEvent) => any
+  valueEmail: string
+  onChangeEmail: (value: string) => void
+  valuePassword: string
+  onChangePassword: (value: string) => void
+  nameButton: string
+  onClickButton: (ev: MouseEvent) => void
 }
 
 export const AuthForm = ({
@@ -18,25 +18,25 @@ export const AuthForm = ({
   valuePassword,
   onChangePassword,
   nameButton,
-  onClickButton
+  onClickButton,
 }: AuthFormProps) => {
   return (
-    <form action="">
+    <form action=''>
       <Input
-        label="Email"
-        placeholder="Your email"
+        label='Email'
+        placeholder='Your email'
         value={valueEmail}
         onChange={onChangeEmail}
-        type="email"
+        type='email'
       />
       <Input
-        label="Password"
-        placeholder="Your password"
+        label='Password'
+        placeholder='Your password'
         value={valuePassword}
         onChange={onChangePassword}
-        type="password"
+        type='password'
       />
       <Button text={nameButton} onClick={onClickButton} className={styles.authForm__button} />
     </form>
-  );
-};
+  )
+}
