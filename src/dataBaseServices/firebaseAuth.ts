@@ -32,7 +32,7 @@ export class FirebaseAuth implements IDataBaseAuth<UserCredential> {
       )
       res(response)
     })
-    
+
     return await promiseSignIn
   }
   async signUp(email: string, password: string): Promise<UserCredential> {

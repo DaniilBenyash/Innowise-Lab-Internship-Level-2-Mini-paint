@@ -32,8 +32,10 @@ export const Paint = () => {
 
   const handleInputColorChange = (color: string) => setColorBrush(color)
   const handleButtonClick = () => clearCanvas(canvasRef, canvasWidth, canvasHeight, colorBrush)
-  const handleRadioGroupChange = (ev: React.ChangeEvent<HTMLInputElement>) =>
+  const handleRadioGroupChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     setTypeDraw(ev.target.value as enumDraw)
+  }
+    
 
   const { postPicture } = usePaintsData()
   const { userData } = useUserData()

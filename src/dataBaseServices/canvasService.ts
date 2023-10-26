@@ -10,7 +10,7 @@ export type typePaints = typePaint[]
 interface ICanvasService {
   dataBase: IDBService<typePaints>
   key: string
-  getPData(): Promise<typePaints>
+  getData(): Promise<typePaints>
   setData(paint: typePaint, paints: typePaints): Promise<typePaints>
 }
 
@@ -23,7 +23,7 @@ class CanvasService implements ICanvasService {
     this.key = 'paints'
   }
 
-  async getPData(): Promise<typePaints> {
+  async getData(): Promise<typePaints> {
     const response = await this.dataBase.getData(this.key)
     return response
   }
