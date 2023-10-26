@@ -9,6 +9,9 @@ import { enumDraw } from '../../variables/canvasTypeVariables';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { Canvas } from '../Canvas/Canvas';
+import { Header } from '../Header/Header';
+import { usePaintsData } from '../../features/paintsData/usePaintsData';
+import { useUserData } from '../../features/userData/useUserData';
 
 export const Paint = () => {
     const [typeDraw, setTypeDraw] = useState<enumDraw>(enumDraw.Brush)
@@ -20,17 +23,43 @@ export const Paint = () => {
     usePaint(canvasRef, typeDraw, widthBrush, colorBrush, canvasWidth, canvasHeight)
     
     const handleSliderChange = (ev: any) => setWidthBrush(ev.target.value)
-    const handleInputColorChange = (ev: any) => setColorBrush(ev.target.value)
+    const handleInputColorChange = (color: string) => setColorBrush(color)
     const handleButtonClick = () => clearCanvas(canvasRef, canvasWidth, canvasHeight, colorBrush)
     const handleRadioGroupChange = (ev: any) => setTypeDraw(ev.target.value)
+
+    const { postPicture } = usePaintsData()
+    const { userData } = useUserData()
+
+    const pictureData = {
+        user: userData?.email,
+        picture: canvasRef.current?.toDataURL()
+    }
+    const handleButtonPost = () => {
+        postPicture(pictureData)
+    } 
     
     return (
-        <>
-            <Canvas className={styles.paint} ref={canvasRef}/>
-            <Input onChange={handleInputColorChange} type="color" />   
-            <Slider onChange={handleSliderChange} max={maxWidthBrush} defaultValue={widthBrush} aria-label="Default" valueLabelDisplay="auto" sx={{width: canvasWidth}}/>
-            <Button onClick={handleButtonClick} text='Clear' />
-            <ButtonsGroup typeDraw={typeDraw} onChange={handleRadioGroupChange}/>
-        </>
+        <section className={styles.paint}>
+            <Header />
+            <section className={styles.paint__section}>
+                <div className={styles.paint__controlSection}>
+                    <Input onChange={handleInputColorChange} type="color" className={styles.paint__color} /> 
+                    <ButtonsGroup typeDraw={typeDraw} onChange={handleRadioGroupChange}/>
+                </div>
+                <div className={styles.paint__canvasSection}>
+                    <Canvas className={styles.paint__canvas} ref={canvasRef}/>
+                    <div className={styles.paint__controlPanel}>
+                        <Slider onChange={handleSliderChange} max={maxWidthBrush} defaultValue={widthBrush} aria-label="Default" valueLabelDisplay="auto" sx={{width: canvasWidth / 2}}/>
+                        <Button className={styles.paint__button + ' ' + styles.paint__buttonClear} onClick={handleButtonClick} text='Clear' />
+                        <Button className={styles.paint__button + ' ' + styles.paint__buttonPost} onClick={handleButtonPost} text='Post' />
+                    </div>
+                </div>
+            </section>
+            
+              
+            
+            
+            
+        </section>
     )
 }

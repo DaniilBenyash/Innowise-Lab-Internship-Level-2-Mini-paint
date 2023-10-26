@@ -1,9 +1,9 @@
 import { Paint } from "../components/Paint/Paint"
 
-export const CanvasPage = () => {
+export const PaintPage = () => {
 
     return (
-        <main  className="canvas-page">
+        <main>
             <Paint />
         </main>    
     )

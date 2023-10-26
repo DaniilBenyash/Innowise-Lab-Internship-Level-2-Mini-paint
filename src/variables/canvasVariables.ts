@@ -1,5 +1,5 @@
-const canvasWidth = 500
-const canvasHeight = 400
+const canvasWidth = 600
+const canvasHeight = 500
 const maxWidthBrush = 20
 const defaultWidthBrush = 5
 const defaultColorBrush = '#000000'

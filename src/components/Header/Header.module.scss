@@ -1,0 +1,31 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+
+    &__title{
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    &__user_panel{
+        font-size: 18px;
+    }
+
+    &__button{
+        background-color: none;
+        border: none;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .header{
+        
+        &__user_panel{
+            font-size: 0;
+        }
+    }
+}

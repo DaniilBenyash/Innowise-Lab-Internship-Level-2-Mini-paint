@@ -16,6 +16,7 @@
     "@types/node": "^16.18.58",
     "@types/react": "^18.2.28",
     "@types/react-dom": "^18.2.13",
+    "classnames": "^2.3.2",
     "firebase": "^10.4.0",
     "globals": "^13.22.0",
     "pre-commit": "^1.2.2",
@@ -54,5 +55,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "pre-commit": [
+    "lint",
+    "validate",
+    "test"
+  ]
 }
