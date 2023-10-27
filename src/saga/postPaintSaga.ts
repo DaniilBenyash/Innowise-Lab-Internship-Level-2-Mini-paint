@@ -7,9 +7,9 @@ import { FirebaseError } from 'firebase/app'
 export function* fetchPostPaint(action: PayloadAction<typePaint>) {
   try {
     const paint = action.payload
-    const paints: typePaints = yield canvasService.getPaints() as Promise<typePaints>
+    const paints: typePaints = yield canvasService.getData() as Promise<typePaints>
 
-    const data: typePaints = yield canvasService.setPaint(paint, paints) as Promise<typePaints>
+    const data: typePaints = yield canvasService.setData(paint, paints) as Promise<typePaints>
 
     yield put(setPaints(data))
   } catch (error) {

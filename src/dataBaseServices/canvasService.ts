@@ -25,6 +25,7 @@ class CanvasService implements ICanvasService {
 
   async getData(): Promise<typePaints> {
     const response = await this.dataBase.getData(this.key)
+
     return response
   }
 
