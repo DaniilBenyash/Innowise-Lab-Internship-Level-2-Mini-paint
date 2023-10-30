@@ -1,7 +1,6 @@
 import { Input } from '../Input/Input'
 import { Button } from '../Button/Button'
 import { MouseEvent } from 'react'
-import styles from './AuthForm.module.scss'
 
 type AuthFormProps = {
   valueEmail: string
@@ -28,6 +27,7 @@ export const AuthForm = ({
         value={valueEmail}
         onChange={onChangeEmail}
         type='email'
+        typeStyle='primary'
       />
       <Input
         label='Password'
@@ -35,8 +35,9 @@ export const AuthForm = ({
         value={valuePassword}
         onChange={onChangePassword}
         type='password'
+        typeStyle='primary'
       />
-      <Button text={nameButton} onClick={onClickButton} className={styles.authForm__button} />
+      <Button text={nameButton} onClick={onClickButton} type='primary' />
     </form>
   )
 }

@@ -1,10 +1,10 @@
 import { useEffect, useState, MouseEvent } from 'react'
-import { useUserData } from '../../features/userData/useUserData'
+import { useUserData } from '../features/userData/useUserData'
 import { useNavigate, Link } from 'react-router-dom'
-import styles from './SignInPage.module.scss'
-import { MAIN_PAGE, SIGN_UP } from '../../variables/routes'
-import { AuthForm } from '../../components/AuthForm/AuthForm'
-import { typeUserData } from '../../variables/reduxTypes'
+import styles from './SignPage.module.scss'
+import { MAIN_PAGE, SIGN_UP } from '../variables/routes'
+import { AuthForm } from '../components/AuthForm/AuthForm'
+import { typeUserData } from '../variables/reduxTypes'
 
 export const SignInPage = () => {
   const [email, setEmail] = useState('')
@@ -44,10 +44,10 @@ export const SignInPage = () => {
   }
 
   return (
-    <main className={styles.sign_in}>
-      <div className={styles.sign_in__section}>
+    <main className={styles.signPage}>
+      <div className={styles.section}>
         <h1>Sign In</h1>
-        <p className={styles.sign_in__error}>{error}</p>
+        <p className={styles.error}>{error}</p>
         <AuthForm
           valueEmail={email}
           onChangeEmail={changeInputEmail}
@@ -56,7 +56,7 @@ export const SignInPage = () => {
           nameButton='Sign In'
           onClickButton={handleSubmit}
         />
-        <p className={styles.sign_in__link}>
+        <p className={styles.link}>
           New to Canvas?
           <Link to={SIGN_UP}> Create an account</Link>
         </p>

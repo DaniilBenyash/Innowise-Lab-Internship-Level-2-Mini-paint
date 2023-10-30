@@ -51,14 +51,14 @@ export const Paint = () => {
   return (
     <section className={styles.paint}>
       <Header />
-      <section className={styles.paint__section}>
-        <div className={styles.paint__controlSection}>
-          <Input onChange={handleInputColorChange} type='color' className={styles.paint__color} />
+      <section className={styles.section}>
+        <div>
+          <Input onChange={handleInputColorChange} type='color' typeStyle='secondary' />
           <ButtonsGroup typeDraw={typeDraw} onChange={handleRadioGroupChange} />
         </div>
-        <div className={styles.paint__canvasSection}>
-          <Canvas className={styles.paint__canvas} ref={canvasRef} />
-          <div className={styles.paint__controlPanel}>
+        <div className={styles.canvasSection}>
+          <Canvas className={styles.canvas} ref={canvasRef} />
+          <div className={styles.controlPanel}>
             <Slider
               onChange={handleSliderChange}
               max={maxWidthBrush}
@@ -67,16 +67,8 @@ export const Paint = () => {
               valueLabelDisplay='auto'
               sx={{ width: canvasWidth / 2 }}
             />
-            <Button
-              className={styles.paint__button + ' ' + styles.paint__buttonClear}
-              onClick={handleButtonClick}
-              text='Clear'
-            />
-            <Button
-              className={styles.paint__button + ' ' + styles.paint__buttonPost}
-              onClick={handleButtonPost}
-              text='Post'
-            />
+            <Button type='secondary' onClick={handleButtonClick} text='Clear' />
+            <Button type='primary' onClick={handleButtonPost} text='Post' />
           </div>
         </div>
       </section>

@@ -4,7 +4,7 @@ import { typeImages } from '../repositories/images/interfaces/imagesController'
 import { setImages } from '../features/images/imagesSlice'
 import { FirebaseError } from 'firebase/app'
 
-export function* fetchGetPaints() {
+export function* fetchGetImages() {
   try {
     const images: typeImages = yield imagesController.getImages() as Promise<typeImages>
 
@@ -14,6 +14,6 @@ export function* fetchGetPaints() {
   }
 }
 
-export function* getPaintsSaga() {
-  yield takeEvery('paints/getPaints', fetchGetPaints)
+export function* getImagesSaga() {
+  yield takeEvery('images/getImages', fetchGetImages)
 }

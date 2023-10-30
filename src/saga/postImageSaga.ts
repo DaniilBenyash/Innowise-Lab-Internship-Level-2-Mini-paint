@@ -21,6 +21,6 @@ export function* fetchPostImage(action: PayloadAction<typeImage>) {
   }
 }
 
-export function* postPaintSaga() {
+export function* postImageSaga() {
   yield takeEvery('images/postImage', fetchPostImage)
 }

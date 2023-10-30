@@ -1,14 +1,22 @@
-.input {
+.formPrimary {
     display: flex;
     flex-direction: column;
     gap: 5px;
     width: 350px;
     margin-bottom: 25px;
+}
 
-    &__form {
-        height: 50px;
-        border-radius: 20px;
-        padding-left: 10px;
-        border: 1px solid #719191;
-    }
+.inputPrimary {
+    height: 50px;
+    padding-left: 10px;
+    border: 1px solid #719191;
+    border-radius: 20px;
+}
+
+.inputSecondary {
+    height: 200px;
+    width: 100px;
+    background: none;
+    border: none;
+    border-radius: 20px;
 }

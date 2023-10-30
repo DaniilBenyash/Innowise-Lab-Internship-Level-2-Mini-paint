@@ -10,6 +10,7 @@ type InputProps = {
   type?: string
   min?: string
   className?: string
+  typeStyle: 'primary' | 'secondary'
 }
 
 export const Input = ({
@@ -17,19 +18,22 @@ export const Input = ({
   placeholder,
   onChange,
   value,
-  type = 'input',
   min,
-  className,
+  type = 'input',
+  typeStyle,
 }: InputProps) => {
   const handleChangeInput = (ev: ChangeEvent<HTMLInputElement>) => onChange(ev.target.value)
 
-  const labelStyle = classNames({ [styles.input]: !className })
-
-  const inputStyle = classNames(className, {
-    [styles.input__form]: !className,
+  const inputStyle = classNames({
+    [styles.inputPrimary]: typeStyle === 'primary',
+    [styles.inputSecondary]: typeStyle === 'secondary',
   })
+  const formStyle = classNames({
+    [styles.formPrimary]: typeStyle === 'primary',
+  })
+
   return (
-    <label className={labelStyle}>
+    <label className={formStyle}>
       {label}
       <input
         type={type}

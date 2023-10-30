@@ -36,18 +36,15 @@ export const MainPage = () => {
       <section>
         {cards?.map((card: typeImage, id: number) => {
           return (
-            <div key={id} className={styles.mainPage__card}>
-              <div className={styles.mainPage__infoLine}>
+            <div key={id} className={styles.card}>
+              <div className={styles.infoLine}>
                 <p>{card.user}</p>
                 {typeCards === 'ALL' ? (
-                  <Button
-                    className={styles.mainPage__infoButton}
-                    onClick={() => filterPictures(card.user)}
-                  >
+                  <Button type='mainInfo' onClick={() => filterPictures(card.user)}>
                     Show other pictures
                   </Button>
                 ) : (
-                  <Button className={styles.mainPage__infoButton} onClick={setAllCards}>
+                  <Button type='mainInfo' onClick={setAllCards}>
                     Show all pictures
                   </Button>
                 )}
@@ -56,8 +53,8 @@ export const MainPage = () => {
             </div>
           )
         })}
-        <Link to={PAINT_PAGE} className={styles.mainPage__paintLink}>
-          <Button text='Paint' className={styles.mainPage__paintButton} />
+        <Link to={PAINT_PAGE} className={styles.paintLink}>
+          <Button text='Paint' type='mainPaint' />
         </Link>
       </section>
     </main>

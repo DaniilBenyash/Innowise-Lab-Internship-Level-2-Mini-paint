@@ -10,12 +10,12 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <Link to={MAIN_PAGE}>
-        <h1 className={styles.header__title}>Canvas</h1>
+        <h1 className={styles.title}>Canvas</h1>
       </Link>
       {userData && (
-        <div className={styles.header__user_panel}>
+        <div className={styles.userPanel}>
           Hello, {userData?.email}
-          <Button onClick={deleteUser} className={styles.header__button}>
+          <Button onClick={deleteUser} type='tertiary'>
             <Image
               width='35'
               height='35'

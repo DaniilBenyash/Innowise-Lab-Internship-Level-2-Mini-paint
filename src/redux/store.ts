@@ -4,8 +4,8 @@ import userReducer from '../features/userData/userDataSlice'
 import { signInSaga } from '../saga/signInSaga'
 import { signUpSaga } from '../saga/signUpSaga'
 import paintReducer from '../features/images/imagesSlice'
-import { postPaintSaga } from '../saga/postPaintSaga'
-import { getPaintsSaga } from '../saga/getPaintsSaga'
+import { postImageSaga } from '../saga/postImageSaga'
+import { getImagesSaga } from '../saga/getImagesSaga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -21,8 +21,8 @@ export const store = configureStore({
 
 sagaMiddleware.run(signInSaga)
 sagaMiddleware.run(signUpSaga)
-sagaMiddleware.run(postPaintSaga)
-sagaMiddleware.run(getPaintsSaga)
+sagaMiddleware.run(postImageSaga)
+sagaMiddleware.run(getImagesSaga)
 
 export type RootState = ReturnType<typeof store.getState>
 
