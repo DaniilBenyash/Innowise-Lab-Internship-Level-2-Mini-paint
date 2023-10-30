@@ -1,10 +1,10 @@
 import { ThemeProvider } from './components/ThemeProvider/ThemeProvider'
 import { RoutesComponent } from './Router/RoutesComponent/RoutesComponent'
-import { usePaintsData } from './features/paintsData/usePaintsData'
+import { useImages } from './features/images/useImages'
 
 export const App = () => {
-  const { pictures, getPictures } = usePaintsData()
-  if (!pictures) getPictures()
+  const { images, getImages } = useImages()
+  if (!images) getImages()
 
   return (
     <ThemeProvider>

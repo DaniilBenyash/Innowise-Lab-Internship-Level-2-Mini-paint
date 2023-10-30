@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { authService } from '../dataBaseServices/firebaseAuth'
+import { firebaseAuthRepository } from '../repositories/auth/firebaseAuthRepository'
 import { setUser, signInFailure } from '../features/userData/userDataSlice'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { typeAuthData, typeUserData } from '../variables/reduxTypes'
@@ -11,7 +11,7 @@ export function* fetchSignIn(action: PayloadAction<typeAuthData>) {
     const email = action.payload.email
     const password = action.payload.password
 
-    const data: UserCredential = yield authService.signIn(
+    const data: UserCredential = yield firebaseAuthRepository.signIn(
       email,
       password,
     ) as Promise<UserCredential>

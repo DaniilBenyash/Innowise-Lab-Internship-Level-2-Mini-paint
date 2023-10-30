@@ -16,8 +16,9 @@ import { Button } from '../Button/Button'
 import { Input } from '../Input/Input'
 import { Canvas } from '../Canvas/Canvas'
 import { Header } from '../Header/Header'
-import { usePaintsData } from '../../features/paintsData/usePaintsData'
+import { useImages } from '../../features/images/useImages'
 import { useUserData } from '../../features/userData/useUserData'
+import { typeImage } from '../../repositories/images/interfaces/imagesController'
 
 export const Paint = () => {
   const [typeDraw, setTypeDraw] = useState<enumDraw>(enumDraw.Brush)
@@ -35,17 +36,16 @@ export const Paint = () => {
   const handleRadioGroupChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     setTypeDraw(ev.target.value as enumDraw)
   }
-    
 
-  const { postPicture } = usePaintsData()
+  const { postImage } = useImages()
   const { userData } = useUserData()
 
-  const pictureData = {
+  const image: typeImage = {
     user: userData?.email,
-    picture: canvasRef.current?.toDataURL(),
+    image: canvasRef.current?.toDataURL(),
   }
   const handleButtonPost = () => {
-    postPicture(pictureData)
+    postImage(image)
   }
 
   return (

@@ -1,22 +1,26 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { canvasService, typePaints, typePaint } from '../dataBaseServices/canvasService'
+import { imagesController } from '../repositories/images/imagesController'
+import { typeImages, typeImage } from '../repositories/images/interfaces/imagesController'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { setPaints } from '../features/paintsData/paintsDataSlice'
+import { setImages } from '../features/images/imagesSlice'
 import { FirebaseError } from 'firebase/app'
 
-export function* fetchPostPaint(action: PayloadAction<typePaint>) {
+export function* fetchPostImage(action: PayloadAction<typeImage>) {
   try {
-    const paint = action.payload
-    const paints: typePaints = yield canvasService.getData() as Promise<typePaints>
+    const image = action.payload
+    const images: typeImages = yield imagesController.getImages() as Promise<typeImages>
 
-    const data: typePaints = yield canvasService.setData(paint, paints) as Promise<typePaints>
+    const responseImages: typeImages = yield imagesController.setImage(
+      image,
+      images,
+    ) as Promise<typeImages>
 
-    yield put(setPaints(data))
+    yield put(setImages(responseImages))
   } catch (error) {
     yield alert((error as FirebaseError).code)
   }
 }
 
 export function* postPaintSaga() {
-  yield takeEvery('paints/postPaint', fetchPostPaint)
+  yield takeEvery('images/postImage', fetchPostImage)
 }

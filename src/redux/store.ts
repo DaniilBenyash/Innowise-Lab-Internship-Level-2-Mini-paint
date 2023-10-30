@@ -3,7 +3,7 @@ import createSagaMiddleware from '@redux-saga/core'
 import userReducer from '../features/userData/userDataSlice'
 import { signInSaga } from '../saga/signInSaga'
 import { signUpSaga } from '../saga/signUpSaga'
-import paintReducer from '../features/paintsData/paintsDataSlice'
+import paintReducer from '../features/images/imagesSlice'
 import { postPaintSaga } from '../saga/postPaintSaga'
 import { getPaintsSaga } from '../saga/getPaintsSaga'
 
@@ -12,7 +12,7 @@ const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    paints: paintReducer,
+    images: paintReducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(sagaMiddleware)
