@@ -19,8 +19,9 @@ export const usePaint = (canvasRef: RefObject<HTMLCanvasElement>, typeBrush: Typ
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (canvas) {
-        typesBrushes[typeBrush](canvas)
-    }
+
+    if (!canvas) return
+    
+    typesBrushes[typeBrush](canvas)
   }, [canvasRef, typeBrush])
 }

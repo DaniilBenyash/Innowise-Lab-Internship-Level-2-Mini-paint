@@ -23,26 +23,23 @@ export const Paint = () => {
 
   const clearCanvas = (canvasRef: RefObject<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
-    if (canvas) {
-      const clearPaint = new ClearPaint(canvas)
-      clearPaint.clear()
-    }
+    if (!canvas) return
+    const clearPaint = new ClearPaint(canvas)
+    clearPaint.clear()
   }
 
   const changeColor = (canvasRef: RefObject<HTMLCanvasElement>, color: string) => {
     const canvas = canvasRef.current
-    if (canvas) {
-      const changePaintSettings = new ChangePaintSettings(canvas)
-      changePaintSettings.changeColor(color)
-    }
+    if (!canvas) return
+    const changePaintSettings = new ChangePaintSettings(canvas)
+    changePaintSettings.changeColor(color)
   }
 
   const changeWidthBrush = (canvasRef: RefObject<HTMLCanvasElement>, width: number) => {
     const canvas = canvasRef.current
-    if (canvas) {
-      const changePaintSettings = new ChangePaintSettings(canvas)
-      changePaintSettings.changeWidthBrush(width)
-    }
+    if (!canvas) return
+    const changePaintSettings = new ChangePaintSettings(canvas)
+    changePaintSettings.changeWidthBrush(width)
   }
 
   const handleSliderChange = (ev: Event, width: number | number[]) =>
