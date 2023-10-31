@@ -20,11 +20,11 @@ export class ClearPaint implements IClearPaint {
   }
 
   clear() {
-    if (this.context) {
-      const originalColor = this.context.fillStyle
-      this.context.fillStyle = '#ffffff'
-      this.context.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
-      this.context.fillStyle = originalColor
-    }
+    if (!this.context) return
+    
+    const originalColor = this.context.fillStyle
+    this.context.fillStyle = '#ffffff'
+    this.context.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
+    this.context.fillStyle = originalColor
   }
 }
