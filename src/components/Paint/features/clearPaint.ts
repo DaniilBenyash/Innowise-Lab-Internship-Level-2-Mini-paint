@@ -1,3 +1,5 @@
+import { RefObject } from 'react'
+
 interface IClearPaint {
   canvas: HTMLCanvasElement
   context: CanvasRenderingContext2D | null
@@ -21,10 +23,17 @@ export class ClearPaint implements IClearPaint {
 
   clear() {
     if (!this.context) return
-    
+
     const originalColor = this.context.fillStyle
     this.context.fillStyle = '#ffffff'
     this.context.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
     this.context.fillStyle = originalColor
   }
 }
+
+export const clearCanvas = (canvasRef: RefObject<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const clearPaint = new ClearPaint(canvas)
+    clearPaint.clear()
+  }

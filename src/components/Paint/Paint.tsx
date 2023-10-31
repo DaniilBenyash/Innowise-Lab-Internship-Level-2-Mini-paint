@@ -3,7 +3,7 @@ import styles from './Paint.module.scss'
 import { canvasWidth, maxWidthBrush, defaultWidthBrush } from '../../variables/canvasVariables'
 import Slider from '@mui/material/Slider'
 import { ButtonsGroup } from '@components/ButtonsGroup/ButtonsGroup'
-import { ClearPaint } from './features/clearPaint'
+import { clearCanvas } from './features/clearPaint'
 import { TypesOfBrushes } from '@/variables/canvasTypeVariables'
 import { Button } from '@components/Button/Button'
 import { Input } from '@components/Input/Input'
@@ -13,34 +13,13 @@ import { useImages } from '@/features/images/useImages'
 import { useUserData } from '@/features/userData/useUserData'
 import { typeImage } from '@/repositories/images/interfaces/imagesController'
 import { usePaint } from './usePaint'
-import { ChangePaintSettings } from './features/changePaintSettings'
+import { changeColor, changeWidthBrush } from './features/changePaintSettings'
 
 export const Paint = () => {
   const [typeBrush, setTypeBrush] = useState<TypesOfBrushes>(TypesOfBrushes.Brush)
   const canvasRef: RefObject<HTMLCanvasElement> = useRef(null)
 
   usePaint(canvasRef, typeBrush)
-
-  const clearCanvas = (canvasRef: RefObject<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const clearPaint = new ClearPaint(canvas)
-    clearPaint.clear()
-  }
-
-  const changeColor = (canvasRef: RefObject<HTMLCanvasElement>, color: string) => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const changePaintSettings = new ChangePaintSettings(canvas)
-    changePaintSettings.changeColor(color)
-  }
-
-  const changeWidthBrush = (canvasRef: RefObject<HTMLCanvasElement>, width: number) => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const changePaintSettings = new ChangePaintSettings(canvas)
-    changePaintSettings.changeWidthBrush(width)
-  }
 
   const handleSliderChange = (ev: Event, width: number | number[]) =>
     changeWidthBrush(canvasRef, width as number)
@@ -60,7 +39,7 @@ export const Paint = () => {
       user: userData?.email,
       image: canvas.toDataURL(),
     }
-    
+
     postImage(image)
   }
   const handleButtonPost = () => post(canvasRef)

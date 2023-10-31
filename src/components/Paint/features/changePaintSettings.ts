@@ -1,3 +1,5 @@
+import { RefObject } from 'react'
+
 interface IChangePaintSettings {
   canvas: HTMLCanvasElement
   context: CanvasRenderingContext2D | null
@@ -5,7 +7,7 @@ interface IChangePaintSettings {
   changeColor(color: string): void
 }
 
-export class ChangePaintSettings implements IChangePaintSettings {
+class ChangePaintSettings implements IChangePaintSettings {
   canvas: HTMLCanvasElement
   context: CanvasRenderingContext2D | null
 
@@ -23,7 +25,21 @@ export class ChangePaintSettings implements IChangePaintSettings {
 
   changeWidthBrush(width: number) {
     if (!this.context) return
-    
+
     this.context.lineWidth = width
   }
+}
+
+export const changeColor = (canvasRef: RefObject<HTMLCanvasElement>, color: string) => {
+  const canvas = canvasRef.current
+  if (!canvas) return
+  const changePaintSettings = new ChangePaintSettings(canvas)
+  changePaintSettings.changeColor(color)
+}
+
+export const changeWidthBrush = (canvasRef: RefObject<HTMLCanvasElement>, width: number) => {
+  const canvas = canvasRef.current
+  if (!canvas) return
+  const changePaintSettings = new ChangePaintSettings(canvas)
+  changePaintSettings.changeWidthBrush(width)
 }
