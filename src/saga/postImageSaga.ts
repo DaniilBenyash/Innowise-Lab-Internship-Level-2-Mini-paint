@@ -9,7 +9,7 @@ export function* fetchPostImage(action: PayloadAction<typeImage>) {
   try {
     const image = action.payload
     const images: typeImages = yield imagesController.getImages() as Promise<typeImages>
-
+    
     const responseImages: typeImages = yield imagesController.setImage(
       image,
       images,

@@ -23,5 +23,9 @@ export const usePaint = (canvasRef: RefObject<HTMLCanvasElement>, typeBrush: Typ
     if (!canvas) return
     
     typesBrushes[typeBrush](canvas)
+    
+    return(() => {
+        typesBrushes[typeBrush](canvas).removeEventListeners()
+    })
   }, [canvasRef, typeBrush])
 }

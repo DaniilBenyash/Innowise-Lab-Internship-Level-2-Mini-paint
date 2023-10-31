@@ -51,12 +51,19 @@ export const Paint = () => {
   const { postImage } = useImages()
   const { userData } = useUserData()
 
-  const image: typeImage = {
-    user: userData?.email,
-    image: canvasRef.current?.toDataURL(),
-  }
+  const post = (canvasRef: RefObject<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current
 
-  const handleButtonPost = () => postImage(image)
+    if (!canvas) return
+
+    const image: typeImage = {
+      user: userData?.email,
+      image: canvas.toDataURL(),
+    }
+    
+    postImage(image)
+  }
+  const handleButtonPost = () => post(canvasRef)
 
   return (
     <section className={styles.paint}>
