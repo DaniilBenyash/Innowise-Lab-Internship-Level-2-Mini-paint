@@ -1,10 +1,6 @@
-import React, { RefObject, useEffect, useRef, useState } from 'react'
+import { RefObject, useRef, useState } from 'react'
 import styles from './Paint.module.scss'
-import {
-  canvasWidth,
-  maxWidthBrush,
-  defaultWidthBrush,
-} from '../../variables/canvasVariables'
+import { canvasWidth, maxWidthBrush, defaultWidthBrush } from '../../variables/canvasVariables'
 import Slider from '@mui/material/Slider'
 import { ButtonsGroup } from '@components/ButtonsGroup/ButtonsGroup'
 import { ClearPaint } from './features/clearPaint'
@@ -16,36 +12,16 @@ import { Header } from '@components/Header/Header'
 import { useImages } from '@/features/images/useImages'
 import { useUserData } from '@/features/userData/useUserData'
 import { typeImage } from '@/repositories/images/interfaces/imagesController'
-import { Brush } from './features/tools/Brush'
-import { Line } from './features/tools/Line'
-import { Circle } from './features/tools/Circle'
-import { Poligon } from './features/tools/Poligon'
-import { Rectangle } from './features/tools/Rectangle'
-import { Star} from './features/tools/Star'
+import { usePaint } from './usePaint'
 import { ChangePaintSettings } from './features/changePaintSettings'
 
 export const Paint = () => {
   const [typeBrush, setTypeBrush] = useState<TypesOfBrushes>(TypesOfBrushes.Brush)
   const canvasRef: RefObject<HTMLCanvasElement> = useRef(null)
 
-  const type = {
-    [TypesOfBrushes.Brush]:(canvas: HTMLCanvasElement) => new Brush(canvas),
-    [TypesOfBrushes.Line]:(canvas: HTMLCanvasElement) => new Line(canvas),
-    [TypesOfBrushes.Circle]:(canvas: HTMLCanvasElement) => new Circle(canvas),
-    [TypesOfBrushes.Poligon]:(canvas: HTMLCanvasElement) => new Poligon(canvas),
-    [TypesOfBrushes.Rectangle]:(canvas: HTMLCanvasElement) => new Rectangle(canvas),
-    [TypesOfBrushes.Star]:(canvas: HTMLCanvasElement) => new Star(canvas),
-  }
+  usePaint(canvasRef, typeBrush)
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (canvas) {
-      type[typeBrush](canvas)
-    }
-  }, [canvasRef, typeBrush])
-
-
-  const clearCanvas = (canvasRef: RefObject<HTMLCanvasElement>) => { 
+  const clearCanvas = (canvasRef: RefObject<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
     if (canvas) {
       const clearPaint = new ClearPaint(canvas)
@@ -53,7 +29,7 @@ export const Paint = () => {
     }
   }
 
-  const changeColor = (canvasRef: RefObject<HTMLCanvasElement>, color: string) => { 
+  const changeColor = (canvasRef: RefObject<HTMLCanvasElement>, color: string) => {
     const canvas = canvasRef.current
     if (canvas) {
       const changePaintSettings = new ChangePaintSettings(canvas)
@@ -61,7 +37,7 @@ export const Paint = () => {
     }
   }
 
-  const changeWidthBrush= (canvasRef: RefObject<HTMLCanvasElement>, width: number) => { 
+  const changeWidthBrush = (canvasRef: RefObject<HTMLCanvasElement>, width: number) => {
     const canvas = canvasRef.current
     if (canvas) {
       const changePaintSettings = new ChangePaintSettings(canvas)
@@ -69,7 +45,8 @@ export const Paint = () => {
     }
   }
 
-  const handleSliderChange = (ev: Event, width: number | number[]) => changeWidthBrush(canvasRef, width as number)
+  const handleSliderChange = (ev: Event, width: number | number[]) =>
+    changeWidthBrush(canvasRef, width as number)
   const handleInputColorChange = (color: string) => changeColor(canvasRef, color)
   const handleButtonClick = () => clearCanvas(canvasRef)
   const handleRadioGroupChange = (value: TypesOfBrushes) => setTypeBrush(value)
