@@ -1,9 +1,9 @@
 import styles from './Header.module.scss'
 import { Link } from 'react-router-dom'
-import { useUserData } from '../../features/userData/useUserData'
-import { MAIN_PAGE } from '../../variables/routes'
-import { Image } from '../Image/Image'
-import { Button } from '../Button/Button'
+import { useUserData } from '@/features/userData/useUserData'
+import { MAIN_PAGE } from '@/variables/routes'
+import { Image } from '@components/Image/Image'
+import { Button } from '@components/Button/Button'
 
 export const Header = () => {
   const { deleteUser, userData } = useUserData()

@@ -8,17 +8,17 @@ import {
   defaultColorBrush,
 } from '../../variables/canvasVariables'
 import Slider from '@mui/material/Slider'
-import { ButtonsGroup } from '../ButtonsGroup/ButtonsGroup'
+import { ButtonsGroup } from '@components/ButtonsGroup/ButtonsGroup'
 import { usePaint } from './usePaint'
-import { clearCanvas } from '../../features/canvasFeatures/clearCanvas'
-import { enumDraw } from '../../variables/canvasTypeVariables'
-import { Button } from '../Button/Button'
-import { Input } from '../Input/Input'
-import { Canvas } from '../Canvas/Canvas'
-import { Header } from '../Header/Header'
-import { useImages } from '../../features/images/useImages'
-import { useUserData } from '../../features/userData/useUserData'
-import { typeImage } from '../../repositories/images/interfaces/imagesController'
+import { clearCanvas } from '@/features/canvasFeatures/clearCanvas'
+import { enumDraw } from '@/variables/canvasTypeVariables'
+import { Button } from '@components/Button/Button'
+import { Input } from '@components/Input/Input'
+import { Canvas } from '@components/Canvas/Canvas'
+import { Header } from '@components/Header/Header'
+import { useImages } from '@/features/images/useImages'
+import { useUserData } from '@/features/userData/useUserData'
+import { typeImage } from '@/repositories/images/interfaces/imagesController'
 
 export const Paint = () => {
   const [typeDraw, setTypeDraw] = useState<enumDraw>(enumDraw.Brush)

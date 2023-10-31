@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { deleteInfo } from './userDataSlice'
-import { typeAuthData } from '../../variables/reduxTypes'
+import { typeAuthData } from '@/variables/reduxTypes'
 
 export const useUserData = () => {
   const dispatch = useAppDispatch()

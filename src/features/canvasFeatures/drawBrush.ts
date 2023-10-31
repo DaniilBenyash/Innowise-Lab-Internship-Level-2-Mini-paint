@@ -1,4 +1,4 @@
-import { typeContext } from '../../variables/canvasTypeVariables'
+import { typeContext } from '@/variables/canvasTypeVariables'
 import { startDraw } from './startDraw'
 
 const startDrawBrush = (context: typeContext, setDraw: React.Dispatch<React.SetStateAction<boolean>>) => startDraw(context, setDraw)

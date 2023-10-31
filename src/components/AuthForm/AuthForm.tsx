@@ -1,5 +1,5 @@
-import { Input } from '../Input/Input'
-import { Button } from '../Button/Button'
+import { Input } from '@components/Input/Input'
+import { Button } from '@components/Button/Button'
 import { MouseEvent } from 'react'
 
 type AuthFormProps = {

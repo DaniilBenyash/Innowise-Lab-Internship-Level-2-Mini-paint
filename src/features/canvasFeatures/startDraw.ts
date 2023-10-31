@@ -1,4 +1,4 @@
-import { typeContext } from '../../variables/canvasTypeVariables'
+import { typeContext } from '@/variables/canvasTypeVariables'
 
 type typeCoord = {
   x?: number

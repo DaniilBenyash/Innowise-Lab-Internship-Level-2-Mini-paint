@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { typeImage, typeImages } from '../../repositories/images/interfaces/imagesController'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { typeImage, typeImages } from '@/repositories/images/interfaces/imagesController'
 
 export const useImages = () => {
   const dispatch = useAppDispatch()

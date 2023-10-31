@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import styles from './MainPage.module.scss'
-import { Header } from '../../components/Header/Header'
-import { Image } from '../../components/Image/Image'
-import { useImages } from '../../features/images/useImages'
-import { Button } from '../../components/Button/Button'
+import { Header } from '@components/Header/Header'
+import { Image } from '@components/Image/Image'
+import { useImages } from '@/features/images/useImages'
+import { Button } from '@components/Button/Button'
 import { Link } from 'react-router-dom'
-import { PAINT_PAGE } from '../../variables/routes'
-import { typeImages, typeImage } from '../../repositories/images/interfaces/imagesController'
+import { PAINT_PAGE } from '@/variables/routes'
+import { typeImages, typeImage } from '@/repositories/images/interfaces/imagesController'
 
 export const MainPage = () => {
   const { images } = useImages()

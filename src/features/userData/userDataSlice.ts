@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { typeUserData } from '../../variables/reduxTypes'
+import { typeUserData } from '@/variables/reduxTypes'
 
 export type typeInitialState = {
   userData: typeUserData | null

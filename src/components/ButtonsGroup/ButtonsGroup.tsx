@@ -1,7 +1,7 @@
 import FormControl from '@mui/joy/FormControl'
 import Radio from '@mui/joy/Radio'
 import RadioGroup from '@mui/joy/RadioGroup'
-import { enumDraw } from '../../variables/canvasTypeVariables'
+import { enumDraw } from '@/variables/canvasTypeVariables'
 import { ChangeEvent } from 'react'
 
 type ButtonsGroupProps = {

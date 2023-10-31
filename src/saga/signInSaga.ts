@@ -1,8 +1,8 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { firebaseAuthRepository } from '../repositories/auth/firebaseAuthRepository'
-import { setUser, signInFailure } from '../features/userData/userDataSlice'
+import { firebaseAuthRepository } from '@/repositories/auth/firebaseAuthRepository'
+import { setUser, signInFailure } from '@/features/userData/userDataSlice'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { typeAuthData, typeUserData } from '../variables/reduxTypes'
+import { typeAuthData, typeUserData } from '@/variables/reduxTypes'
 import { UserCredential } from 'firebase/auth'
 import { FirebaseError } from 'firebase/app'
 

@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useState } from 'react'
-import { typeContext, enumDraw } from '../../variables/canvasTypeVariables'
-import { getEvents } from '../../features/canvasFeatures/.getEvents'
+import { typeContext, enumDraw } from '@/variables/canvasTypeVariables'
+import { getEvents } from '@/features/canvasFeatures/.getEvents'
 
 export const usePaint = (
   canvasRef: RefObject<HTMLCanvasElement>,

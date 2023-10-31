@@ -2,7 +2,7 @@ import { startDrawBrush, moveDrawBrush } from './drawBrush'
 import { startDrawLine, moveDrawLine } from './drawLine'
 import { startDrawRectangle, moveDrawRectangle } from './drawRectangle'
 import { startDrawCircle, moveDrawCircle } from './drawCircle'
-import { typeContext, enumDraw, typeDrawEvent } from '../../variables/canvasTypeVariables'
+import { typeContext, enumDraw, typeDrawEvent } from '@/variables/canvasTypeVariables'
 import { moveDrawStar, startDrawStar } from './drawStar'
 import { moveDrawPoligon, startDrawPoligon } from './drawPoligon'
 

@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from '@redux-saga/core'
-import userReducer from '../features/userData/userDataSlice'
-import { signInSaga } from '../saga/signInSaga'
-import { signUpSaga } from '../saga/signUpSaga'
-import paintReducer from '../features/images/imagesSlice'
-import { postImageSaga } from '../saga/postImageSaga'
-import { getImagesSaga } from '../saga/getImagesSaga'
+import userReducer from '@/features/userData/userDataSlice'
+import { signInSaga } from '@/saga/signInSaga'
+import { signUpSaga } from '@/saga/signUpSaga'
+import paintReducer from '@/features/images/imagesSlice'
+import { postImageSaga } from '@/saga/postImageSaga'
+import { getImagesSaga } from '@/saga/getImagesSaga'
 
 const sagaMiddleware = createSagaMiddleware()
 

@@ -5,7 +5,7 @@ import {
   Auth,
   UserCredential,
 } from 'firebase/auth'
-import { firebase } from '../../firebase'
+import { firebase } from '@/firebase'
 import { IAuthRepository } from './interfaces/authRepository'
 
 export class FirebaseAuthRepository implements IAuthRepository<UserCredential> {

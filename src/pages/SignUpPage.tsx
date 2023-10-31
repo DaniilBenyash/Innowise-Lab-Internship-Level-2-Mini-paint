@@ -1,9 +1,9 @@
 import { useEffect, useState, MouseEvent } from 'react'
-import { useUserData } from '../features/userData/useUserData'
+import { useUserData } from '@/features/userData/useUserData'
 import { useNavigate } from 'react-router-dom'
 import styles from './SignPage.module.scss'
-import { MAIN_PAGE } from '../variables/routes'
-import { AuthForm } from '../components/AuthForm/AuthForm'
+import { MAIN_PAGE } from '@/variables/routes'
+import { AuthForm } from '@components/AuthForm/AuthForm'
 
 export const SignUpPage = () => {
   const [email, setEmail] = useState('')

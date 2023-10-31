@@ -1,7 +1,7 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { imagesController } from '../repositories/images/imagesController'
-import { typeImages } from '../repositories/images/interfaces/imagesController'
-import { setImages } from '../features/images/imagesSlice'
+import { imagesController } from '@/repositories/images/imagesController'
+import { typeImages } from '@/repositories/images/interfaces/imagesController'
+import { setImages } from '@/features/images/imagesSlice'
 import { FirebaseError } from 'firebase/app'
 
 export function* fetchGetImages() {

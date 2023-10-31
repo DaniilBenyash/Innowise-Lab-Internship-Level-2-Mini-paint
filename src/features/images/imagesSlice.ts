@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { typeImages } from '../../repositories/images/interfaces/imagesController'
+import { typeImages } from '@/repositories/images/interfaces/imagesController'
 
 type typeInitialState = {
   images: typeImages | null

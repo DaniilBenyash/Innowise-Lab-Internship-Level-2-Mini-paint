@@ -1,8 +1,8 @@
 import { put, takeEvery } from 'redux-saga/effects'
-import { imagesController } from '../repositories/images/imagesController'
-import { typeImages, typeImage } from '../repositories/images/interfaces/imagesController'
+import { imagesController } from '@/repositories/images/imagesController'
+import { typeImages, typeImage } from '@/repositories/images/interfaces/imagesController'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { setImages } from '../features/images/imagesSlice'
+import { setImages } from '@/features/images/imagesSlice'
 import { FirebaseError } from 'firebase/app'
 
 export function* fetchPostImage(action: PayloadAction<typeImage>) {
