@@ -1,13 +1,9 @@
 import React, { LegacyRef } from 'react'
+import styles from './Canvas.module.scss'
 import { canvasWidth, canvasHeight } from '@/variables/canvasVariables'
 
-type CanvasProps = {
-  className: string
-}
-
-export const Canvas = React.forwardRef(function canvas(
-  { className }: CanvasProps,
-  ref: LegacyRef<HTMLCanvasElement>,
-) {
-  return <canvas width={canvasWidth} height={canvasHeight} className={className} ref={ref}></canvas>
+export const Canvas = React.forwardRef(function canvas(props, ref: LegacyRef<HTMLCanvasElement>) {
+  return (
+    <canvas width={canvasWidth} height={canvasHeight} className={styles.canvas} ref={ref}></canvas>
+  )
 })

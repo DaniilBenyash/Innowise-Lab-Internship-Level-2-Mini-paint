@@ -5,20 +5,22 @@ import { TypesOfBrushes } from '@/variables/canvasTypeVariables'
 import { ChangeEvent } from 'react'
 
 type ButtonsGroupProps = {
-  typeDraw: TypesOfBrushes
+  typeBrush: TypesOfBrushes
   onChange: (value: TypesOfBrushes) => void
 }
 
-export const ButtonsGroup = ({ typeDraw, onChange }: ButtonsGroupProps) => {
+export const ButtonsGroup = ({ typeBrush, onChange }: ButtonsGroupProps) => {
   const arrayOfButtons = Object.entries(TypesOfBrushes)
 
-  const handleRadioButtonClick = (ev: ChangeEvent<HTMLInputElement>) => {
+  const handleRadioButtonClick = (ev: ChangeEvent<HTMLInputElement>) => {    
+    console.log(123);
+    
     return onChange(ev.target.value as TypesOfBrushes)
   }
 
   return (
     <FormControl>
-      <RadioGroup value={typeDraw} onChange={handleRadioButtonClick} name='radio-buttons-group'>
+      <RadioGroup value={typeBrush} onChange={handleRadioButtonClick} name='radio-buttons-group'>
         {arrayOfButtons.map(([nameEvent, event]) => {
           return <Radio key={nameEvent} value={event} label={nameEvent} variant='outlined' />
         })}

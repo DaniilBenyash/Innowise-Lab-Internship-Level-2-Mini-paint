@@ -1,16 +1,13 @@
-import React, { RefObject, useRef, useState } from 'react'
+import React, { RefObject, useEffect, useRef, useState } from 'react'
 import styles from './Paint.module.scss'
 import {
   canvasWidth,
-  canvasHeight,
   maxWidthBrush,
   defaultWidthBrush,
-  defaultColorBrush,
 } from '../../variables/canvasVariables'
 import Slider from '@mui/material/Slider'
 import { ButtonsGroup } from '@components/ButtonsGroup/ButtonsGroup'
-import { usePaint } from './usePaint'
-import { clearCanvas } from '@/features/canvasFeatures/clearCanvas'
+import { ClearPaint } from './features/clearPaint'
 import { TypesOfBrushes } from '@/variables/canvasTypeVariables'
 import { Button } from '@components/Button/Button'
 import { Input } from '@components/Input/Input'
@@ -19,23 +16,63 @@ import { Header } from '@components/Header/Header'
 import { useImages } from '@/features/images/useImages'
 import { useUserData } from '@/features/userData/useUserData'
 import { typeImage } from '@/repositories/images/interfaces/imagesController'
+import { Brush } from './features/tools/Brush'
+import { Line } from './features/tools/Line'
+import { Circle } from './features/tools/Circle'
+import { Poligon } from './features/tools/Poligon'
+import { Rectangle } from './features/tools/Rectangle'
+import { Star} from './features/tools/Star'
+import { ChangePaintSettings } from './features/changePaintSettings'
 
 export const Paint = () => {
-  const [typeDraw, setTypeDraw] = useState<TypesOfBrushes>(TypesOfBrushes.Brush)
-  const [widthBrush, setWidthBrush] = useState(defaultWidthBrush)
-  const [colorBrush, setColorBrush] = useState(defaultColorBrush)
-
+  const [typeBrush, setTypeBrush] = useState<TypesOfBrushes>(TypesOfBrushes.Brush)
   const canvasRef: RefObject<HTMLCanvasElement> = useRef(null)
 
-  usePaint(canvasRef, typeDraw, widthBrush, colorBrush, canvasWidth, canvasHeight)
-
-  const handleSliderChange = (ev: Event, value: number | number[]) => setWidthBrush(value as number)
-
-  const handleInputColorChange = (color: string) => setColorBrush(color)
-  const handleButtonClick = () => clearCanvas(canvasRef, canvasWidth, canvasHeight, colorBrush)
-  const handleRadioGroupChange = (value: TypesOfBrushes) => {
-    setTypeDraw(value)
+  const type = {
+    [TypesOfBrushes.Brush]:(canvas: HTMLCanvasElement) => new Brush(canvas),
+    [TypesOfBrushes.Line]:(canvas: HTMLCanvasElement) => new Line(canvas),
+    [TypesOfBrushes.Circle]:(canvas: HTMLCanvasElement) => new Circle(canvas),
+    [TypesOfBrushes.Poligon]:(canvas: HTMLCanvasElement) => new Poligon(canvas),
+    [TypesOfBrushes.Rectangle]:(canvas: HTMLCanvasElement) => new Rectangle(canvas),
+    [TypesOfBrushes.Star]:(canvas: HTMLCanvasElement) => new Star(canvas),
   }
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (canvas) {
+      type[typeBrush](canvas)
+    }
+  }, [canvasRef, typeBrush])
+
+
+  const clearCanvas = (canvasRef: RefObject<HTMLCanvasElement>) => { 
+    const canvas = canvasRef.current
+    if (canvas) {
+      const clearPaint = new ClearPaint(canvas)
+      clearPaint.clear()
+    }
+  }
+
+  const changeColor = (canvasRef: RefObject<HTMLCanvasElement>, color: string) => { 
+    const canvas = canvasRef.current
+    if (canvas) {
+      const changePaintSettings = new ChangePaintSettings(canvas)
+      changePaintSettings.changeColor(color)
+    }
+  }
+
+  const changeWidthBrush= (canvasRef: RefObject<HTMLCanvasElement>, width: number) => { 
+    const canvas = canvasRef.current
+    if (canvas) {
+      const changePaintSettings = new ChangePaintSettings(canvas)
+      changePaintSettings.changeWidthBrush(width)
+    }
+  }
+
+  const handleSliderChange = (ev: Event, width: number | number[]) => changeWidthBrush(canvasRef, width as number)
+  const handleInputColorChange = (color: string) => changeColor(canvasRef, color)
+  const handleButtonClick = () => clearCanvas(canvasRef)
+  const handleRadioGroupChange = (value: TypesOfBrushes) => setTypeBrush(value)
 
   const { postImage } = useImages()
   const { userData } = useUserData()
@@ -44,9 +81,8 @@ export const Paint = () => {
     user: userData?.email,
     image: canvasRef.current?.toDataURL(),
   }
-  const handleButtonPost = () => {
-    postImage(image)
-  }
+
+  const handleButtonPost = () => postImage(image)
 
   return (
     <section className={styles.paint}>
@@ -54,13 +90,14 @@ export const Paint = () => {
       <section className={styles.section}>
         <div>
           <Input onChange={handleInputColorChange} type='color' typeStyle='secondary' />
-          <ButtonsGroup typeDraw={typeDraw} onChange={handleRadioGroupChange} />
+          <ButtonsGroup typeBrush={typeBrush} onChange={handleRadioGroupChange} />
         </div>
         <div className={styles.canvasSection}>
-          <Canvas className={styles.canvas} ref={canvasRef} />
+          <Canvas ref={canvasRef} />
           <div className={styles.controlPanel}>
             <Slider
               onChange={handleSliderChange}
+              min={1}
               max={maxWidthBrush}
               defaultValue={defaultWidthBrush}
               aria-label='Default'
