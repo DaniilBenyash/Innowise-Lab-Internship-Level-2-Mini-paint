@@ -7,5 +7,9 @@ type LinkComponentProps = {
 }
 
 export const LinkComponent = ({ to, children }: LinkComponentProps) => {
-  return <Link to={to} className={styles.linkComponent}>{children}</Link>
+  return (
+    <Link to={to} className={styles.linkComponent}>
+      {children}
+    </Link>
+  )
 }

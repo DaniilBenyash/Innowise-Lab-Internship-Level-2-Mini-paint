@@ -12,11 +12,8 @@ type ButtonsGroupProps = {
 export const ButtonsGroup = ({ typeBrush, onChange }: ButtonsGroupProps) => {
   const arrayOfButtons = Object.entries(TypesOfBrushes)
 
-  const handleRadioButtonClick = (ev: ChangeEvent<HTMLInputElement>) => {    
-    console.log(123);
-    
-    return onChange(ev.target.value as TypesOfBrushes)
-  }
+  const handleRadioButtonClick = (ev: ChangeEvent<HTMLInputElement>) =>
+    onChange(ev.target.value as TypesOfBrushes)
 
   return (
     <FormControl>
