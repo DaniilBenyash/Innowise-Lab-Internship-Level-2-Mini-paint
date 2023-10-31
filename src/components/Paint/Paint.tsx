@@ -11,7 +11,7 @@ import Slider from '@mui/material/Slider'
 import { ButtonsGroup } from '@components/ButtonsGroup/ButtonsGroup'
 import { usePaint } from './usePaint'
 import { clearCanvas } from '@/features/canvasFeatures/clearCanvas'
-import { enumDraw } from '@/variables/canvasTypeVariables'
+import { TypesOfBrushes } from '@/variables/canvasTypeVariables'
 import { Button } from '@components/Button/Button'
 import { Input } from '@components/Input/Input'
 import { Canvas } from '@components/Canvas/Canvas'
@@ -21,7 +21,7 @@ import { useUserData } from '@/features/userData/useUserData'
 import { typeImage } from '@/repositories/images/interfaces/imagesController'
 
 export const Paint = () => {
-  const [typeDraw, setTypeDraw] = useState<enumDraw>(enumDraw.Brush)
+  const [typeDraw, setTypeDraw] = useState<TypesOfBrushes>(TypesOfBrushes.Brush)
   const [widthBrush, setWidthBrush] = useState(defaultWidthBrush)
   const [colorBrush, setColorBrush] = useState(defaultColorBrush)
 
@@ -33,8 +33,8 @@ export const Paint = () => {
 
   const handleInputColorChange = (color: string) => setColorBrush(color)
   const handleButtonClick = () => clearCanvas(canvasRef, canvasWidth, canvasHeight, colorBrush)
-  const handleRadioGroupChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setTypeDraw(ev.target.value as enumDraw)
+  const handleRadioGroupChange = (value: TypesOfBrushes) => {
+    setTypeDraw(value)
   }
 
   const { postImage } = useImages()

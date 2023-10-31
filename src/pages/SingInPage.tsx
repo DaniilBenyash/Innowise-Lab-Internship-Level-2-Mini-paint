@@ -1,4 +1,4 @@
-import { useEffect, useState, MouseEvent } from 'react'
+import { useEffect, useState } from 'react'
 import { useUserData } from '@/features/userData/useUserData'
 import { useNavigate, Link } from 'react-router-dom'
 import styles from './SignPage.module.scss'
@@ -32,8 +32,7 @@ export const SignInPage = () => {
     userHandler(userData, signInError)
   }, [userData, signInError, navigate])
 
-  function handleSubmit(ev: MouseEvent) {
-    ev.preventDefault()
+  function handleSubmit() {
 
     const formData = {
       email: email,

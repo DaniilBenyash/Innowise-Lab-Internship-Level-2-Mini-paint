@@ -2,12 +2,12 @@ import { startDrawBrush, moveDrawBrush } from './drawBrush'
 import { startDrawLine, moveDrawLine } from './drawLine'
 import { startDrawRectangle, moveDrawRectangle } from './drawRectangle'
 import { startDrawCircle, moveDrawCircle } from './drawCircle'
-import { typeContext, enumDraw, typeDrawEvent } from '@/variables/canvasTypeVariables'
+import { typeContext, TypesOfBrushes, typeDrawEvent } from '@/variables/canvasTypeVariables'
 import { moveDrawStar, startDrawStar } from './drawStar'
 import { moveDrawPoligon, startDrawPoligon } from './drawPoligon'
 
 export const getEvents = (
-  typeEvent: enumDraw,
+  typeEvent: TypesOfBrushes,
   context: typeContext,
   setDraw: React.Dispatch<React.SetStateAction<boolean>>,
   draw: boolean,
@@ -16,7 +16,7 @@ export const getEvents = (
   canvasHeight: number,
 ): typeDrawEvent => {
   switch (typeEvent) {
-    case enumDraw.Brush:
+    case TypesOfBrushes.Brush:
       return {
         startDraw: () => {
           startDrawBrush(context, setDraw)
@@ -28,7 +28,7 @@ export const getEvents = (
           setDraw(false)
         },
       }
-    case enumDraw.Line:
+    case TypesOfBrushes.Line:
       return {
         startDraw: (event: MouseEvent) => {
           startDrawLine(context, setDraw, event)
@@ -40,7 +40,7 @@ export const getEvents = (
           setDraw(false)
         },
       }
-    case enumDraw.Rectangle:
+    case TypesOfBrushes.Rectangle:
       return {
         startDraw: (event: MouseEvent) => {
           startDrawRectangle(context, setDraw, event)
@@ -52,7 +52,7 @@ export const getEvents = (
           setDraw(false)
         },
       }
-    case enumDraw.Circle:
+    case TypesOfBrushes.Circle:
       return {
         startDraw: (event: MouseEvent) => {
           startDrawCircle(context, setDraw, event)
@@ -64,7 +64,7 @@ export const getEvents = (
           setDraw(false)
         },
       }
-    case enumDraw.Star:
+    case TypesOfBrushes.Star:
       return {
         startDraw: (event: MouseEvent) => {
           startDrawStar(context, setDraw, event)
@@ -76,7 +76,7 @@ export const getEvents = (
           setDraw(false)
         },
       }
-    case enumDraw.Poligon:
+    case TypesOfBrushes.Poligon:
       return {
         startDraw: (event: MouseEvent) => {
           startDrawPoligon(context, setDraw, event)

@@ -8,7 +8,7 @@ type AuthFormProps = {
   valuePassword: string
   onChangePassword: (value: string) => void
   nameButton: string
-  onClickButton: (ev: MouseEvent) => void
+  onClickButton: () => void
 }
 
 export const AuthForm = ({
@@ -19,6 +19,12 @@ export const AuthForm = ({
   nameButton,
   onClickButton,
 }: AuthFormProps) => {
+
+  const handleClickButton = (ev: MouseEvent) => {
+    ev.preventDefault()
+    onClickButton()
+  }
+  
   return (
     <form action=''>
       <Input
@@ -37,7 +43,7 @@ export const AuthForm = ({
         type='password'
         typeStyle='primary'
       />
-      <Button text={nameButton} onClick={onClickButton} type='primary' />
+      <Button text={nameButton} onClick={handleClickButton} type='primary' />
     </form>
   )
 }

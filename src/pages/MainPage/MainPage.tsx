@@ -4,30 +4,50 @@ import { Header } from '@components/Header/Header'
 import { Image } from '@components/Image/Image'
 import { useImages } from '@/features/images/useImages'
 import { Button } from '@components/Button/Button'
-import { Link } from 'react-router-dom'
+import { LinkComponent } from '@/components/LinkComponent/LinkComponent'
 import { PAINT_PAGE } from '@/variables/routes'
 import { typeImages, typeImage } from '@/repositories/images/interfaces/imagesController'
+
+enum TypesCards {
+  All,
+  Filtered,
+}
 
 export const MainPage = () => {
   const { images } = useImages()
 
-  const [cards, setCard] = useState<typeImages | null>(null)
-  const [typeCards, setTypeCard] = useState<'ALL' | 'FILTERED'>('ALL')
+  const [cards, setCards] = useState<typeImages | null>(null)
+  const [typeCards, setTypeCard] = useState<TypesCards>(TypesCards.All)
 
   useEffect(() => {
-    setCard(images)
+    setCards(images)
   }, [images])
 
-  const filterPictures = (email?: string) => {
-    const filteredCards = images?.filter((card: typeImage) => card.user === email)
-    setTypeCard('FILTERED')
+  const sortCards = (email: string | undefined) => {
+    switch (typeCards) {
+      case TypesCards.All: {
+        if (!email) return
 
-    if (filteredCards) setCard(filteredCards)
-  }
+        const filteredCards = images?.filter((card: typeImage) => card.user === email)
 
-  const setAllCards = () => {
-    setTypeCard('ALL')
-    setCard(images)
+        setTypeCard(TypesCards.Filtered)
+        if (filteredCards) setCards(filteredCards)
+
+        break
+      }
+      case TypesCards.Filtered: {
+        setTypeCard(TypesCards.All)
+        setCards(images)
+
+        break
+      }
+      default: {
+        setTypeCard(TypesCards.All)
+        setCards(images)
+
+        break
+      }
+    }
   }
 
   return (
@@ -39,23 +59,17 @@ export const MainPage = () => {
             <div key={id} className={styles.card}>
               <div className={styles.infoLine}>
                 <p>{card.user}</p>
-                {typeCards === 'ALL' ? (
-                  <Button type='mainInfo' onClick={() => filterPictures(card.user)}>
-                    Show other pictures
-                  </Button>
-                ) : (
-                  <Button type='mainInfo' onClick={setAllCards}>
-                    Show all pictures
-                  </Button>
-                )}
+                <Button type='mainInfo' onClick={() => sortCards(card.user)}>
+                  {typeCards === TypesCards.All ? 'Show other pictures' : 'Show all cards'}
+                </Button>
               </div>
               {card.image && <Image src={card.image} alt='' />}
             </div>
           )
         })}
-        <Link to={PAINT_PAGE} className={styles.paintLink}>
+        <LinkComponent to={PAINT_PAGE}>
           <Button text='Paint' type='mainPaint' />
-        </Link>
+        </LinkComponent>
       </section>
     </main>
   )

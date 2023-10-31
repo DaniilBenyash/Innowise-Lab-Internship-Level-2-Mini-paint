@@ -1,4 +1,4 @@
-export enum enumDraw {
+export enum TypesOfBrushes {
   Brush = 'brushDraw',
   Line = 'lineDraw',
   Rectangle = 'rectangleDraw',
