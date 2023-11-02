@@ -18,19 +18,19 @@ export class FirebaseAuthRepository implements IAuthRepository<UserCredential> {
   }
 
   async signIn(email: string, password: string): Promise<UserCredential> {
-    const promiseSignIn: Promise<UserCredential> = new Promise((res) => {
+    const user: Promise<UserCredential> = new Promise((res) => {
       const response = signInWithEmailAndPassword(this.auth, email, password)
       res(response)
     })
 
-    return await promiseSignIn
+    return await user
   }
   async signUp(email: string, password: string): Promise<UserCredential> {
-    const promiseSignUp: Promise<UserCredential> = new Promise((res) => {
+    const user: Promise<UserCredential> = new Promise((res) => {
       const response = createUserWithEmailAndPassword(this.auth, email, password)
       res(response)
     })
-    return await promiseSignUp
+    return await user
   }
 }
 

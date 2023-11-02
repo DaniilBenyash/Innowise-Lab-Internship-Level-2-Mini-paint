@@ -59,7 +59,7 @@ export const MainPage = () => {
             <div key={id} className={styles.card}>
               <div className={styles.infoLine}>
                 <p>{card.user}</p>
-                <Button type='mainInfo' onClick={() => sortCards(card.user)}>
+                <Button type='primary2' onClick={() => sortCards(card.user)}>
                   {typeCards === TypesCards.All ? 'Show other pictures' : 'Show all cards'}
                 </Button>
               </div>
@@ -68,7 +68,7 @@ export const MainPage = () => {
           )
         })}
         <LinkComponent to={PAINT_PAGE}>
-          <Button text='Paint' type='mainPaint' />
+          <Button text='Paint' type='secondary2' />
         </LinkComponent>
       </section>
     </main>

@@ -8,13 +8,13 @@ export class FirebaseImagesRepository<TImages> implements IImagesRepository<TIma
   async getImages<TImages>(): Promise<TImages> {
     const starCountRef = ref(this.db, this.key)
 
-    const promiseGetImages: Promise<TImages> = new Promise((res) => {
+    const images: Promise<TImages> = new Promise((res) => {
       onValue(starCountRef, (snapshot) => {
         res(snapshot.val())
       })
     })
 
-    return await promiseGetImages
+    return await images
   }
 
   async setImage<TImage>(image: TImage): Promise<TImages> {
