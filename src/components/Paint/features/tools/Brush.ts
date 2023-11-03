@@ -1,6 +1,6 @@
-import { Paint } from '../Paint'
+import { Tool } from '../Tool'
 
-export class Brush extends Paint {
+export class Brush extends Tool {
   mouseDown: boolean = false
 
   constructor(canvas: HTMLCanvasElement) {

@@ -1,6 +1,6 @@
-import { Paint } from '../Paint'
+import { Tool } from '../Tool'
 
-export class Poligon extends Paint {
+export class Poligon extends Tool {
   mouseDown: boolean = false
   coordX: number = 0
   coordY: number = 0

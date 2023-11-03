@@ -1,6 +1,6 @@
-import { Paint } from '../Paint'
+import { Tool } from '../Tool'
 
-export class Star extends Paint {
+export class Star extends Tool {
   mouseDown: boolean = false
   coordX: number = 0
   coordY: number = 0
@@ -32,10 +32,13 @@ export class Star extends Paint {
     this.context?.moveTo(this.coordX, this.coordY + radius)
 
     for (let i = 0; i < 2 * 7; i++) {
-        const newRadius = i % 2 === 0 ? radius : radius / 2
-        const angle = (Math.PI * i) / 6
-        this.context?.lineTo(this.coordX + newRadius * Math.sin(angle), this.coordY + newRadius * Math.cos(angle))
-      }
+      const newRadius = i % 2 === 0 ? radius : radius / 2
+      const angle = (Math.PI * i) / 6
+      this.context?.lineTo(
+        this.coordX + newRadius * Math.sin(angle),
+        this.coordY + newRadius * Math.cos(angle),
+      )
+    }
 
     this.context?.fill()
     this.context?.closePath()

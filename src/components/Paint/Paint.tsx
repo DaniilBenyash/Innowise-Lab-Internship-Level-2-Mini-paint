@@ -1,11 +1,6 @@
-import { RefObject, useRef, useState, useEffect } from 'react'
+import { useCallback, useState } from 'react'
 import styles from './Paint.module.scss'
-import {
-  canvasWidth,
-  maxWidthBrush,
-  defaultWidthBrush,
-  defaultColorBrush,
-} from '../../variables/canvasVariables'
+import { canvasWidth, maxWidthBrush, defaultWidthBrush } from '../../variables/canvasVariables'
 import Slider from '@mui/material/Slider'
 import { ButtonsGroup } from '@components/ButtonsGroup/ButtonsGroup'
 import { TypesOfBrushes } from '@/variables/canvasTypeVariables'
@@ -16,43 +11,37 @@ import { Header } from '@components/Header/Header'
 import { useImages } from '@/features/images/useImages'
 import { useUserData } from '@/features/userData/useUserData'
 import { typeImage } from '@/repositories/images/interfaces/imagesController'
-import { createPaint } from './features/createPaint'
+import { typesBrushes } from './features/typesBrushes'
+import { CanvasСontroller } from './features/CanvasController'
 
 export const Paint = () => {
   const [typeBrush, setTypeBrush] = useState<TypesOfBrushes>(TypesOfBrushes.Brush)
-  const [widthBrush, setWidthBrush] = useState(defaultWidthBrush)
-  const [colorBrush, setColorBrush] = useState(defaultColorBrush)
-  const [clearPaint, setClearPaint] = useState(false)
-  const canvasRef: RefObject<HTMLCanvasElement> = useRef(null)
 
-  useEffect(() => {
-    const canvas = canvasRef.current
+  const canvasController = CanvasСontroller.getInstance()
 
-    if(!canvas) return
+  const canvasRef = useCallback(
+    (canvas: HTMLCanvasElement) => {
+      canvasController.setCanvas(canvas)
+      const cnv = canvasController.getCanvas
 
-    const paint = createPaint(canvas, typeBrush)
+      if (!cnv) return
 
-    paint.changeColor(colorBrush)
-    paint.changeWidthBrush(widthBrush)
-    if (clearPaint) paint.clearPaint()
+      canvasController.setCurrentTool(typesBrushes[typeBrush](cnv))
+    },
+    [typeBrush],
+  )
 
-    return () => {
-      setClearPaint(false)
-      paint?.removeEventListeners()
-    }
-  }, [canvasRef, typeBrush, colorBrush, widthBrush, clearPaint])
-
-  const handleSliderChange = (ev: Event, width: number | number[]) => setWidthBrush(width as number)
-  const handleInputColorChange = (color: string) => setColorBrush(color)
-  const handleButtonClick = () => setClearPaint(true)
+  const handleSliderChange = (ev: Event, width: number | number[]) =>
+    canvasController.changeWidthBrush(width as number)
+  const handleInputColorChange = (color: string) => canvasController.changeColor(color)
+  const handleButtonClick = () => canvasController.clearPaint()
   const handleRadioGroupChange = (value: TypesOfBrushes) => setTypeBrush(value)
 
   const { postImage } = useImages()
   const { userData } = useUserData()
 
-  const post = (canvasRef: RefObject<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current
-
+  const handleButtonPost = () => {
+    const canvas = canvasController.getCanvas
     if (!canvas) return
 
     const image: typeImage = {
@@ -62,7 +51,6 @@ export const Paint = () => {
 
     postImage(image)
   }
-  const handleButtonPost = () => post(canvasRef)
 
   return (
     <section className={styles.paint}>
@@ -79,7 +67,7 @@ export const Paint = () => {
               onChange={handleSliderChange}
               min={1}
               max={maxWidthBrush}
-              defaultValue={widthBrush}
+              defaultValue={defaultWidthBrush}
               aria-label='Default'
               valueLabelDisplay='auto'
               sx={{ width: canvasWidth / 2 }}

@@ -1,6 +1,6 @@
-import { Paint } from '../Paint'
+import { Tool } from '../Tool'
 
-export class Line extends Paint {
+export class Line extends Tool {
   mouseDown: boolean = false
   coordX: number = 0
   coordY: number = 0

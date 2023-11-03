@@ -6,7 +6,7 @@ import { Poligon } from './tools/Poligon'
 import { Rectangle } from './tools/Rectangle'
 import { Star } from './tools/Star'
 
-const typesBrushes = {
+export const typesBrushes = {
   [TypesOfBrushes.Brush]: (canvas: HTMLCanvasElement) => new Brush(canvas),
   [TypesOfBrushes.Line]: (canvas: HTMLCanvasElement) => new Line(canvas),
   [TypesOfBrushes.Circle]: (canvas: HTMLCanvasElement) => new Circle(canvas),
@@ -14,6 +14,3 @@ const typesBrushes = {
   [TypesOfBrushes.Rectangle]: (canvas: HTMLCanvasElement) => new Rectangle(canvas),
   [TypesOfBrushes.Star]: (canvas: HTMLCanvasElement) => new Star(canvas),
 }
-
-export const createPaint = (canvas: HTMLCanvasElement, typeBrush: TypesOfBrushes) =>
-  typesBrushes[typeBrush](canvas)
