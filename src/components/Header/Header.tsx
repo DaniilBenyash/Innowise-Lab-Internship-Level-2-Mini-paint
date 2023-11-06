@@ -10,10 +10,12 @@ import { ThemeContext, Theme } from '../ThemeProvider/ThemeProvider'
 export const Header = () => {
   const { deleteUser, user } = useUser()
   const theme = useContext(ThemeContext)
+
   const handleClickButton = () => {
     if (!theme) return
-    const checkTheme = theme.theme === Theme.Light ? Theme.Dark : Theme.Light
-    theme.setTheme(checkTheme)
+
+    const themeState = theme.theme === Theme.Light ? Theme.Dark : Theme.Light
+    theme.setTheme(themeState)
   }
 
   return (

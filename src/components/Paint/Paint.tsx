@@ -3,7 +3,7 @@ import styles from './Paint.module.scss'
 import { canvasWidth, maxWidthBrush, defaultWidthBrush } from '@/variables/canvasVariables'
 import Slider from '@mui/material/Slider'
 import { ButtonsGroup } from '@components/ButtonsGroup/ButtonsGroup'
-import { TypesOfBrushes } from '@/variables/canvasTypeVariables'
+import { BrushesTypes } from '@/variables/canvasTypeVariables'
 import { Button } from '@components/Button/Button'
 import { Input } from '@components/Input/Input'
 import { Canvas } from '@components/Canvas/Canvas'
@@ -15,7 +15,7 @@ import { typesBrushes } from './features/typesBrushes'
 import { CanvasСontroller } from './features/CanvasController'
 
 export const Paint = () => {
-  const [typeBrush, setTypeBrush] = useState<TypesOfBrushes>(TypesOfBrushes.Brush)
+  const [brushType, setBrushType] = useState<BrushesTypes>(BrushesTypes.Brush)
 
   const canvasController = CanvasСontroller.getInstance()
 
@@ -25,20 +25,19 @@ export const Paint = () => {
       const canvas = canvasController.getCanvas
 
       if (!canvas) return
-      canvasController.setCurrentTool(typesBrushes[typeBrush](canvas))
+      canvasController.setCurrentTool(typesBrushes[brushType](canvas))
     },
-    [typeBrush],
+    [brushType],
   )
 
   const handleSliderChange = (ev: Event, width: number | number[]) =>
     canvasController.changeWidthBrush(width as number)
   const handleInputColorChange = (color: string) => canvasController.changeColor(color)
   const handleButtonClick = () => canvasController.clearPaint()
-  const handleRadioGroupChange = (value: TypesOfBrushes) => setTypeBrush(value)
+  const handleRadioGroupChange = (value: BrushesTypes) => setBrushType(value)
 
   const { postImage } = useImages()
   const { user } = useUser()
-
 
   const handleButtonPost = () => {
     const canvas = canvasController.getCanvas
@@ -58,7 +57,7 @@ export const Paint = () => {
       <section className={styles.section}>
         <div>
           <Input onChange={handleInputColorChange} type='color' typeStyle='secondary' />
-          <ButtonsGroup typeBrush={typeBrush} onChange={handleRadioGroupChange} />
+          <ButtonsGroup brushType={brushType} onChange={handleRadioGroupChange} />
         </div>
         <div className={styles.canvasSection}>
           <Canvas ref={canvasRef} />

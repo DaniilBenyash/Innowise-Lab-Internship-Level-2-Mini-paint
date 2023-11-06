@@ -1,11 +1,11 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { IImage } from '@/repositories/images/interfaces/imagesController'
 
-type typeInitialState = {
+interface IInitialState {
   images: IImage[] | null
 }
 
-const initialState: typeInitialState = {
+const initialState: IInitialState = {
   images: null,
 }
 

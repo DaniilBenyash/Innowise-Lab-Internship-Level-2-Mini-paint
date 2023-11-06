@@ -1,14 +1,14 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { IUser } from '@/variables/reduxTypes'
 
-export type typeInitialState = {
+interface IInitialState {
   user: IUser | null
   errorSignIn: string | null
   errorSignUp: string | null
   onSuccess: boolean
 }
 
-const initialState: typeInitialState = {
+const initialState: IInitialState = {
   user: null,
   errorSignIn: null,
   errorSignUp: null,

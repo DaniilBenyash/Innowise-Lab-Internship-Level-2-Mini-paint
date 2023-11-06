@@ -1,7 +1,7 @@
 import { FirebaseApp, initializeApp } from 'firebase/app'
 import { getDatabase } from '@firebase/database'
 
-type typeConfig = {
+interface IConfig {
   apiKey: string
   authDomain: string
   databaseURL: string
@@ -12,7 +12,7 @@ type typeConfig = {
 }
 
 export class FirebaseInitialization {
-  private config: typeConfig
+  private config: IConfig
   private app: FirebaseApp
 
   constructor(config?: string) {
