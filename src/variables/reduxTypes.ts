@@ -1,11 +1,11 @@
-type typeAuthData = {
+interface IAuthCredentials {
   email: string
   password: string
 }
 
-type typeUserData = {
+interface IUser {
   email: string
   id: string
 }
 
-export type { typeAuthData, typeUserData }
+export type { IAuthCredentials, IUser }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useUserData } from '@/features/userData/useUserData'
+import { useUser } from '@/features/user/useUser'
 import { useNavigate } from 'react-router-dom'
 import styles from './SignPage.module.scss'
 import { MAIN_PAGE } from '@/variables/routes'
@@ -13,19 +13,14 @@ export const SignUpPage = () => {
   const changeInputEmail = (email: string) => setEmail(email)
   const changeInputPassword = (password: string) => setPassword(password)
 
-  const { userData, signUpError, signUpUser } = useUserData()
+  const { user, signUpError, signUpUser } = useUser()
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (signUpError) {
-      setError(signUpError)
-    }
-  }, [signUpError])
-
-  useEffect(() => {
-    userData && navigate(MAIN_PAGE)
-  }, [userData, navigate])
+    if (user.onSuccess) navigate(MAIN_PAGE)
+    if (signUpError) setError(signUpError)
+  }, [user, signUpError, navigate])
 
   function handleSubmit() {
     const formData = {

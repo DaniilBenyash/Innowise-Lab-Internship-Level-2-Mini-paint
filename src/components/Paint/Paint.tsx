@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import styles from './Paint.module.scss'
-import { canvasWidth, maxWidthBrush, defaultWidthBrush } from '../../variables/canvasVariables'
+import { canvasWidth, maxWidthBrush, defaultWidthBrush } from '@/variables/canvasVariables'
 import Slider from '@mui/material/Slider'
 import { ButtonsGroup } from '@components/ButtonsGroup/ButtonsGroup'
 import { TypesOfBrushes } from '@/variables/canvasTypeVariables'
@@ -9,8 +9,8 @@ import { Input } from '@components/Input/Input'
 import { Canvas } from '@components/Canvas/Canvas'
 import { Header } from '@components/Header/Header'
 import { useImages } from '@/features/images/useImages'
-import { useUserData } from '@/features/userData/useUserData'
-import { typeImage } from '@/repositories/images/interfaces/imagesController'
+import { useUser } from '@/features/user/useUser'
+import { IImage } from '@/repositories/images/interfaces/imagesController'
 import { typesBrushes } from './features/typesBrushes'
 import { CanvasСontroller } from './features/CanvasController'
 
@@ -20,13 +20,12 @@ export const Paint = () => {
   const canvasController = CanvasСontroller.getInstance()
 
   const canvasRef = useCallback(
-    (canvas: HTMLCanvasElement) => {
-      canvasController.setCanvas(canvas)
-      const cnv = canvasController.getCanvas
+    (canvasElement: HTMLCanvasElement) => {
+      canvasController.setCanvas(canvasElement)
+      const canvas = canvasController.getCanvas
 
-      if (!cnv) return
-
-      canvasController.setCurrentTool(typesBrushes[typeBrush](cnv))
+      if (!canvas) return
+      canvasController.setCurrentTool(typesBrushes[typeBrush](canvas))
     },
     [typeBrush],
   )
@@ -38,14 +37,15 @@ export const Paint = () => {
   const handleRadioGroupChange = (value: TypesOfBrushes) => setTypeBrush(value)
 
   const { postImage } = useImages()
-  const { userData } = useUserData()
+  const { user } = useUser()
+
 
   const handleButtonPost = () => {
     const canvas = canvasController.getCanvas
     if (!canvas) return
 
-    const image: typeImage = {
-      user: userData?.email,
+    const image: IImage = {
+      user: user.user?.email,
       image: canvas.toDataURL(),
     }
 

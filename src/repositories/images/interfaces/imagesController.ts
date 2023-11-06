@@ -1,16 +1,14 @@
 import { IImagesRepository } from './imagesRepository'
 
-type typeImage = {
-  image: string | undefined
-  user: string | undefined
+interface IImage {
+  image?: string
+  user?: string
 }
-
-type typeImages = typeImage[]
 
 interface IImagesController {
-  imagesRepository: IImagesRepository<typeImages>
-  getImages(): Promise<typeImages>
-  setImage(paint: typeImage, paints: typeImages): Promise<typeImages>
+  imagesRepository: IImagesRepository
+  getImages(): Promise<IImage[]>
+  setImage(paint: IImage, paints: IImage[]): Promise<IImage[]>
 }
 
-export type { typeImage, typeImages, IImagesController }
+export type { IImage, IImagesController }

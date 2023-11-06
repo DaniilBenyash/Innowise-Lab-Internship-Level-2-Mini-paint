@@ -6,11 +6,3 @@ export enum TypesOfBrushes {
   Star = 'starDraw',
   Poligon = 'poligonDraw',
 }
-
-export type typeContext = CanvasRenderingContext2D | null | undefined
-
-export type typeDrawEvent = {
-  startDraw: (event: MouseEvent) => void
-  moveDraw: (event: MouseEvent) => void
-  finishDraw: () => void
-}

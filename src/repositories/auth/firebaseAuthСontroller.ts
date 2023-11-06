@@ -6,9 +6,9 @@ import {
   UserCredential,
 } from 'firebase/auth'
 import { firebase } from '@/firebase'
-import { IAuthRepository } from './interfaces/authRepository'
+import { IAuthCredentialsСontroller } from './interfaces/authСontroller'
 
-export class FirebaseAuthRepository implements IAuthRepository<UserCredential> {
+export class FirebaseAuthСontroller implements IAuthCredentialsСontroller<UserCredential> {
   databaseInit
   auth: Auth
 
@@ -23,15 +23,15 @@ export class FirebaseAuthRepository implements IAuthRepository<UserCredential> {
       res(response)
     })
 
-    return await user
+    return user
   }
   async signUp(email: string, password: string): Promise<UserCredential> {
     const user: Promise<UserCredential> = new Promise((res) => {
       const response = createUserWithEmailAndPassword(this.auth, email, password)
       res(response)
     })
-    return await user
+    return user
   }
 }
 
-export const firebaseAuthRepository = new FirebaseAuthRepository()
+export const firebaseAuthСontroller = new FirebaseAuthСontroller()

@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useUserData } from '@/features/userData/useUserData'
+import { useUser } from '@/features/user/useUser'
 import { useNavigate, Link } from 'react-router-dom'
 import styles from './SignPage.module.scss'
 import { MAIN_PAGE, SIGN_UP } from '@/variables/routes'
 import { AuthForm } from '@components/AuthForm/AuthForm'
-import { typeUserData } from '@/variables/reduxTypes'
 
 export const SignInPage = () => {
   const [email, setEmail] = useState('')
@@ -14,26 +13,16 @@ export const SignInPage = () => {
   const changeInputEmail = (email: string) => setEmail(email)
   const changeInputPassword = (password: string) => setPassword(password)
 
-  const { userData, signInError, signInUser } = useUserData()
+  const { user, signInError, signInUser } = useUser()
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    const userHandler = (userData: typeUserData | null, error: string | null) => {
-      try {
-        if (userData) navigate(MAIN_PAGE)
+    if (user.onSuccess) navigate(MAIN_PAGE)
+    if (signInError) setError(signInError)
+  }, [user, signInError, navigate])
 
-        if (error) throw new Error(error)
-      } catch (error) {
-        setError((error as Error).message)
-      }
-    }
-
-    userHandler(userData, signInError)
-  }, [userData, signInError, navigate])
-
-  function handleSubmit() {
-
+  const handleSubmit = () => {
     const formData = {
       email: email,
       password: password,

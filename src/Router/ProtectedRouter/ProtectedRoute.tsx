@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router'
-import { useUserData } from '@/features/userData/useUserData'
+import { useUser } from '@/features/user/useUser'
 import { SIGN_IN } from '@/variables/routes'
 import { ReactNode } from 'react'
 
@@ -8,7 +8,7 @@ type ProtectedRouteProps = {
 }
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { userData } = useUserData()
+  const { user } = useUser()
 
-  return <>{userData ? children : <Navigate to={SIGN_IN} />}</>
+  return (user.user ? children : <Navigate to={SIGN_IN} />) as JSX.Element
 }

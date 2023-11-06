@@ -1,4 +1,6 @@
-export interface IImagesRepository<TImages> {
-  getImages(): Promise<TImages>
-  setImage<TImage>(Image: TImage): Promise<TImages>
+import { IImage } from './imagesController'
+
+export interface IImagesRepository {
+  getImages(): Promise<IImage[]>
+  setImage(Image: IImage[]): Promise<IImage[]>
 }

@@ -1,41 +1,47 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { typeUserData } from '@/variables/reduxTypes'
+import { IUser } from '@/variables/reduxTypes'
 
 export type typeInitialState = {
-  userData: typeUserData | null
+  user: IUser | null
   errorSignIn: string | null
   errorSignUp: string | null
+  onSuccess: boolean
 }
 
 const initialState: typeInitialState = {
-  userData: null,
+  user: null,
   errorSignIn: null,
   errorSignUp: null,
+  onSuccess: false,
 }
 
-export const userDataSlice = createSlice({
-  name: 'userData',
+export const userSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<typeUserData>) => {
-      state.userData = action.payload
+    setUser: (state, action: PayloadAction<IUser>) => {
+      state.user = action.payload
+      state.onSuccess = true
       state.errorSignIn = null
       state.errorSignUp = null
     },
     signInFailure: (state, action: PayloadAction<string>) => {
+      state.onSuccess = false
       state.errorSignIn = action.payload
     },
     signUpFailure: (state, action: PayloadAction<string>) => {
+      state.onSuccess = false
       state.errorSignUp = action.payload
     },
     deleteInfo: (state) => {
-      state.userData = null
+      state.user = null
       state.errorSignIn = null
       state.errorSignUp = null
+      state.onSuccess = false
     },
   },
 })
 
-export const { signInFailure, signUpFailure, deleteInfo, setUser } = userDataSlice.actions
+export const { signInFailure, signUpFailure, deleteInfo, setUser } = userSlice.actions
 
-export default userDataSlice.reducer
+export default userSlice.reducer

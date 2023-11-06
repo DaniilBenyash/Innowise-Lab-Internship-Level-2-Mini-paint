@@ -1,10 +1,13 @@
 @mixin button {
-    width: 350px;
-    height: 50px;
+    width: 100%;
+    padding: 20px;
     border: none;
     border-radius: 20px;
+    text-align: center;
+    font-family: inherit;
     font-size: 18px;
     cursor: pointer;
+    color: inherit
 }
 
 .buttonPrimary {
@@ -26,38 +29,19 @@
 }
 
 .buttonTertiary {
-    margin-left: 10px;
-    border: none;
-    cursor: pointer;
-    background-color: none;
-}
-
-.buttonPrimary2 {
     padding: 10px;
     margin-top: 10px;
     border: none;
     border-radius: 20px;
     background: none;
     background-color: #719191;
+    font-family: inherit;
     font-size: 14px;
     cursor: pointer;
-
+    color: inherit;
+    
     &:active {
         background-color: #529292;
     }
 }
 
-.buttonSecondary2 {
-    bottom: 50px;
-    padding: 20px;
-    border: none;
-    border-radius: 20px;
-    background-color: #eb9a78;
-    font-family: inherit;
-    font-size: 18px;
-    cursor: pointer;
-
-    &:active {
-        background-color: #eb7746;
-    }
-}

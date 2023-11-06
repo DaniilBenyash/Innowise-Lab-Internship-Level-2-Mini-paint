@@ -1,12 +1,12 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { imagesController } from '@/repositories/images/imagesController'
-import { typeImages } from '@/repositories/images/interfaces/imagesController'
+import { IImage } from '@/repositories/images/interfaces/imagesController'
 import { setImages } from '@/features/images/imagesSlice'
 import { FirebaseError } from 'firebase/app'
 
 export function* fetchGetImages() {
   try {
-    const images: typeImages = yield imagesController.getImages() as Promise<typeImages>
+    const images: IImage[] = yield imagesController.getImages()
 
     yield put(setImages(images))
   } catch (error) {

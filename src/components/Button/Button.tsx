@@ -7,7 +7,7 @@ type ButtonProps = {
   text?: string
   className?: string
   children?: ReactNode
-  type: 'primary' | 'secondary' | 'tertiary' | 'primary2' | 'secondary2'
+  type: 'primary' | 'secondary' | 'tertiary'
 }
 
 export const Button = ({ onClick, text, children, type }: ButtonProps) => {
@@ -15,8 +15,6 @@ export const Button = ({ onClick, text, children, type }: ButtonProps) => {
     [styles.buttonPrimary]: type === 'primary',
     [styles.buttonSecondary]: type === 'secondary',
     [styles.buttonTertiary]: type === 'tertiary',
-    [styles.buttonPrimary2]: type === 'primary2',
-    [styles.buttonSecondary2]: type === 'secondary2',
   })
 
   return (

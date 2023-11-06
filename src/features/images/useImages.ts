@@ -1,18 +1,21 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { typeImage, typeImages } from '@/repositories/images/interfaces/imagesController'
+import { IImage } from '@/repositories/images/interfaces/imagesController'
 
 export const useImages = () => {
   const dispatch = useAppDispatch()
 
-  const images: typeImages | null = useAppSelector((state) => state.images.images)
+  const images: IImage[] | null = useAppSelector((state) => state.images.images)
 
   const getImages = () => dispatch({ type: 'images/getImages' })
 
-  const postImage = (image: typeImage) => dispatch({ type: 'images/postImage', payload: image })
+  const postImage = (image: IImage) => dispatch({ type: 'images/postImage', payload: image })
+
+  const setImages = (images: IImage[]) => dispatch({ type: 'images/setImages', payload: images })
 
   return {
     images,
     getImages,
     postImage,
+    setImages,
   }
 }

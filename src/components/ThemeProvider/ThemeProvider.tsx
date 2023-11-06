@@ -1,18 +1,32 @@
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useState, Dispatch, SetStateAction } from 'react'
+import classNames from 'classnames'
+import styles from './ThemeProvider.module.scss'
 
-const ThemeContext = createContext<object | null>(null)
+interface IContext {
+  theme: Theme
+  setTheme: Dispatch<SetStateAction<Theme>>
+}
+
+export const ThemeContext = createContext<IContext | null>(null)
 
 type ThemeProviderProvider = {
   children: ReactNode
 }
 
-enum Theme {
+export enum Theme {
   Light,
-  Dark
+  Dark,
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProvider) => {
   const [theme, setTheme] = useState<Theme>(Theme.Light)
-
-  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
+  const appClassName = classNames(styles.app, {
+    [styles.appLight]: theme === Theme.Light,
+    [styles.appDark]: theme === Theme.Dark,
+  })
+  return (
+    <div className={appClassName}>
+      <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
+    </div>
+  )
 }

@@ -1,8 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { typeImages } from '@/repositories/images/interfaces/imagesController'
+import { IImage } from '@/repositories/images/interfaces/imagesController'
 
 type typeInitialState = {
-  images: typeImages | null
+  images: IImage[] | null
 }
 
 const initialState: typeInitialState = {
@@ -13,7 +13,7 @@ export const imagesSlice = createSlice({
   name: 'images',
   initialState,
   reducers: {
-    setImages: (state, action: PayloadAction<typeImages>) => {
+    setImages: (state, action: PayloadAction<IImage[]>) => {
       state.images = action.payload
     },
   },

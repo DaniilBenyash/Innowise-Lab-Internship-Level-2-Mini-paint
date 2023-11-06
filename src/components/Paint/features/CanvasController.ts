@@ -17,9 +17,9 @@ export class CanvasСontroller {
     return CanvasСontroller.instance
   }
 
-  public setCanvas(canvas: HTMLCanvasElement) {
+  public setCanvas(canvas: HTMLCanvasElement | null) {
+    if (!canvas) return
     this.canvas = canvas
-    if(!canvas) return
     this.context = canvas.getContext('2d')
     this.canvasWidth = canvas.width
     this.canvasHeight = canvas.height
