@@ -9,17 +9,17 @@ export const useUser = () => {
 
   const signInError = useAppSelector((state) => state.user.errorSignIn)
 
-  const signInUser = (user: IAuthCredentials) => dispatch({ type: 'user/signIn', payload: user })
+  const signIn = (user: IAuthCredentials) => dispatch({ type: 'user/signIn', payload: user })
 
   const signUpError = useAppSelector((state) => state.user.errorSignUp)
-  const signUpUser = (user: IAuthCredentials) => dispatch({ type: 'user/signUp', payload: user })
+  const signUp = (user: IAuthCredentials) => dispatch({ type: 'user/signUp', payload: user })
 
   return {
     user,
     deleteUser,
     signInError,
-    signInUser,
+    signIn,
     signUpError,
-    signUpUser,
+    signUp,
   }
 }

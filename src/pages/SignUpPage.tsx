@@ -13,7 +13,7 @@ export const SignUpPage = () => {
   const changeInputEmail = (email: string) => setEmail(email)
   const changeInputPassword = (password: string) => setPassword(password)
 
-  const { user, signUpError, signUpUser } = useUser()
+  const { user, signUpError, signUp } = useUser()
 
   const navigate = useNavigate()
 
@@ -28,7 +28,7 @@ export const SignUpPage = () => {
       password: password,
     }
 
-    signUpUser(formData)
+    signUp(formData)
   }
 
   return (
