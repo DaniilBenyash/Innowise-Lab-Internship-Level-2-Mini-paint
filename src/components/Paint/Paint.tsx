@@ -34,7 +34,7 @@ export const Paint = () => {
     canvasController.changeWidthBrush(width as number)
   const handleInputColorChange = (color: string) => canvasController.changeColor(color)
   const handleButtonClick = () => canvasController.clearPaint()
-  const handleRadioGroupChange = (value: BrushesTypes) => setBrushType(value)
+  const handleRadioGroupChange = (value: string) => setBrushType(value as BrushesTypes)
 
   const { postImage } = useImages()
   const { user } = useUser()
@@ -50,14 +50,15 @@ export const Paint = () => {
 
     postImage(image)
   }
-
+  
+  const list = Object.entries(BrushesTypes)
   return (
     <section className={styles.paint}>
       <Header />
       <section className={styles.section}>
         <div>
           <Input onChange={handleInputColorChange} type='color' typeStyle='secondary' />
-          <ButtonsGroup brushType={brushType} onChange={handleRadioGroupChange} />
+          <ButtonsGroup list={list} onChange={handleRadioGroupChange} currentValue={brushType}/>
         </div>
         <div className={styles.canvasSection}>
           <Canvas ref={canvasRef} />
