@@ -14,22 +14,19 @@ type ThemeProviderProvider = {
 }
 
 export enum Theme {
-  Light,
-  Dark,
+  Light = 'light',
+  Dark = 'dark',
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProvider) => {
   const [theme, setTheme] = useState<Theme>(Theme.Light)
 
-  const appClassName = classNames(styles.app, {
-    [styles.appLight]: theme === Theme.Light,
-    [styles.appDark]: theme === Theme.Dark,
-  })
+  const themeProviderClassNames = classNames(styles.themeProvider)
 
   const changeTheme = () => setTheme(theme === Theme.Light ? Theme.Dark : Theme.Light)
 
   return (
-    <div className={appClassName}>
+    <div className={themeProviderClassNames} data-theme={theme}>
       <ThemeContext.Provider value={{ theme, changeTheme }}>{children}</ThemeContext.Provider>
     </div>
   )

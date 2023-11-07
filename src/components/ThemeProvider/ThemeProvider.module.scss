@@ -1,8 +1,15 @@
-.app {
-    padding: 0 150px;
+[data-theme=light] {
+    --background-color: #ffffff;
+    --font-color: #000000;
 }
 
-.appDark {
-    background-color: black;
-    color: white;
+[data-theme=dark] {
+    --background-color: #000000;
+    --font-color: #ffffff
+}
+
+.themeProvider {
+    padding: 0 150px;
+    background: var(--background-color);
+    color: var(--font-color);
 }
