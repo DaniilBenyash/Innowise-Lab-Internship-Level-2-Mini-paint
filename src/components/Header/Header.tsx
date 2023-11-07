@@ -5,18 +5,11 @@ import { useUser } from '@/features/user/useUser'
 import { MAIN_PAGE } from '@/variables/routes'
 import { Image } from '@components/Image/Image'
 import { Button } from '@components/Button/Button'
-import { ThemeContext, Theme } from '../ThemeProvider/ThemeProvider'
+import { ThemeContext } from '../ThemeProvider/ThemeProvider'
 
 export const Header = () => {
   const { deleteUser, user } = useUser()
   const theme = useContext(ThemeContext)
-
-  const handleClickButton = () => {
-    if (!theme) return
-
-    const themeState = theme.theme === Theme.Light ? Theme.Dark : Theme.Light
-    theme.setTheme(themeState)
-  }
 
   return (
     <header className={styles.header}>
@@ -24,7 +17,7 @@ export const Header = () => {
         <h1 className={styles.title}>Canvas</h1>
       </Link>
       <div className={styles.rightSection}>
-        <Button type='tertiary' onClick={handleClickButton} text='Theme'></Button>
+        <Button type='tertiary' onClick={theme?.changeTheme} text='Theme'></Button>
         {user.user && (
           <div className={styles.userPanel}>
             Hello, {user.user?.email}
